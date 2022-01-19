@@ -1,6 +1,7 @@
 const path = require("path");
 const { HotModuleReplacementPlugin, IgnorePlugin } = require("webpack");
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 
@@ -8,31 +9,27 @@ const tsConf = require('../tsconfig.json')
 
 const config = {
   mode: "development",
-  entry: path.resolve(__dirname, "../examples/pages/dev/main.ts"),
+  entry: path.resolve(__dirname, "../site/pages/dev/main.ts"),
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist"),
   },
   devServer: {
-    // contentBase: false,
-    // publicPath: './dist',
     hot: true,
-    // port: 8080,
     open: true,
-    // hotOnly: true,
-    // compress: true,
-    // overlay: true
   },
-  // watchOptions: {
-  //     ignored: /node_modules/
-  // },
+  watchOptions: {
+      ignored: /node_modules/
+  },
   plugins: [
-    // new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: "Hot Module Replacement",
-      template: path.resolve(__dirname, "../examples/pages/dev/index.html"),
+    new ProgressBarPlugin(),
+
+    new CleanWebpackPlugin({
+      verbose: true,
     }),
-    // new IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "../site/public/index.html"),
+    }),
     new HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
   ],
@@ -114,8 +111,8 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".md"],
     alias: {
-      "k-view-next": path.join(__dirname, "../"),
-      "k-view-next/es": path.join(__dirname, "../es"),
+      "k-view-next": path.join(__dirname, "../components"),
+      "k-view-next/es": path.join(__dirname, "../components"),
       process: "process/browser",
     },
   },

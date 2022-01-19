@@ -5,7 +5,7 @@ export default defineComponent({
     name: 'KButton',
     props: buttonTypes(),
     emits: ['click'],
-    setup(props, { attrs, emit }) {
+    setup(_, { attrs, slots, emit }) {
         const handleClick = (ev: Event) => {
             emit('click', ev)
         }
@@ -17,9 +17,9 @@ export default defineComponent({
             ],
             onClick: handleClick
         }
+        const child = slots.default?.()
         return ()=> {
-            const { type } = props
-            return <button {...btnProps}>{type}-按钮</button>
+            return <button {...btnProps}>{child}</button>
         }
     }
 })

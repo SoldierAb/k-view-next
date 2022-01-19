@@ -1,7 +1,7 @@
 <template>
     <div class="vizier-demo-container">
         count: {{count}}
-        <v-button @click="handleClick">测试</v-button>
+        <k-button @click="handleClick">测试</k-button>
     </div>    
 </template>
 
