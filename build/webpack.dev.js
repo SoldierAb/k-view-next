@@ -1,11 +1,30 @@
 const path = require("path");
-const { HotModuleReplacementPlugin, IgnorePlugin } = require("webpack");
+const { IgnorePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const getBabelConf = require('./getBabelConf')
 
 const tsConf = require('../tsconfig.json')
+
+const getDevBabelConf = ()=>{
+  const bf = getBabelConf()
+  // 设置缓存
+  bf.cacheDirectory = true;
+  // 按需加载
+  bf.plugins.concat([
+    'babel-plugin-import',
+    {
+      libraryName: 'k-view-next',
+      libraryDirectory: '', // default: lib
+      style: true,
+    },
+  ])
+  return bf
+}
+
+const babelConf = getDevBabelConf()
 
 const config = {
   mode: "development",
@@ -19,7 +38,7 @@ const config = {
     open: true,
   },
   watchOptions: {
-      ignored: /node_modules/
+    ignored: /node_modules/
   },
   plugins: [
     new ProgressBarPlugin(),
@@ -30,48 +49,36 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../site/public/index.html"),
     }),
-    new HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
   ],
   module: {
     rules: [
       // babel使用runtime，避免将不需要的代码注入
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         use: [
           {
             loader: "babel-loader",
-            options: {
-              // cacheDirectory: true,
-              presets: ["@babel/preset-env"],
-              plugins: [
-                "@babel/plugin-transform-runtime",
-                [
-                  "import",
-                  {
-                    libraryName: "antd",
-                    style: true, // or 'css'
-                  },
-                  "antd",
-                ],
-              ],
-            },
+            options: babelConf
           },
         ],
       },
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)?$/,
         exclude: /node_modules/,
         use: [
           {
+            loader: "babel-loader",
+            options: babelConf
+          },
+          {
             loader: "ts-loader",
             options: {
-              // 指定特定的ts编译配置，为了区分脚本的ts配置
               compilerOptions: {
                 ...tsConf.compilerOptions,
+                //  Vue3 template 编译缺陷, 需要设置为false, 参考 https://github.com/vuejs/core/issues/4668
                 noUnusedParameters: false,
-                
               },
               appendTsSuffixTo: [/\.vue$/],
             },

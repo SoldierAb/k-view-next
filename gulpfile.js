@@ -94,6 +94,7 @@ function babelify(js, modules) {
 function compile(modules) {
   const modulesDir = modules !== false ? libDir : esDir;
   rimraf.sync(modulesDir);
+  // assets
   // less
   // ts
   let error = 0;
@@ -120,9 +121,8 @@ function compile(modules) {
 
   tsRes.on('finish', check);
   tsRes.on('end', check);
-  const tsFileStream = babelify(tsRes.js, modules);
-  const tsd = tsRes.dts.pipe(gulp.dest(modulesDir));
-  // assets
+  const tsFileStream = babelify(tsRes.js, modules); // ts 文件
+  const tsd = tsRes.dts.pipe(gulp.dest(modulesDir)); // d.ts声明文件
   return merge2([tsFileStream, tsd]);
 }
 

@@ -18,7 +18,6 @@ module.exports = function (modules) {
       resolve("@babel/plugin-transform-runtime"),
       {
         useESModules: modules === false,
-        // version: "^7.10.4",
       },
     ],
   ];
