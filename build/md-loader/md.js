@@ -89,7 +89,7 @@ const fenceWrite = (md) => {
     const isInDemoBox =
       prevToken &&
       prevToken.nesting === 1 &&
-      prevToken.info.trim().match(/^vizier\s*(.*)$/);
+      prevToken.info.trim().match(/^demo\s*(.*)$/);
     const isExternal =
       prevToken &&
       prevToken.nesting === 1 &&

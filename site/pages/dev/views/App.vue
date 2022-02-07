@@ -1,5 +1,5 @@
 <template>
-  <div class="vizier-demo-container">
+  <div class="k-view-demo-container">
     count: {{ count }}
     <k-button @click="handleClick">测试</k-button>
     <DemoBox />
@@ -31,7 +31,7 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-.vizier-demo-container {
+.k-view-demo-container {
   position: relative;
 }
 </style>
