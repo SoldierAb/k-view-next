@@ -8,7 +8,7 @@
       class="demo-content"
     >
       <div ref="code-block">
-        <slot name="code-box" />
+        <slot name="code" />
       </div>
     </div>
     <div
@@ -20,7 +20,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import { ref, computed, onMounted, defineComponent } from "vue";
 
 export default defineComponent({

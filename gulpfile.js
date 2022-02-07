@@ -5,22 +5,24 @@ const gulpBabel = require("gulp-babel");
 const stripCode = require("gulp-strip-code");
 const merge2 = require('merge2');
 const rimraf = require("rimraf");
+const through2 = require("through2")
 
 const { dirname } = require('path');
 
+const compileLess = require('./build/compileLess')
+
 const getBabelConf = require("./build/getBabelConf");
 
-const getTsConf = require("./build/getTsConf")
+const getTsConf = require("./build/getTsConf");
 
 const { getProjectPath } = require("./build/utils");
 
-const tsConf = getTsConf()
+const tsConf = getTsConf();
 
 const cwd = process.cwd();
 const libDir = getProjectPath("lib");
 const esDir = getProjectPath("es");
 const tsDefaultReporter = ts.reporter.defaultReporter();
-
 
 const tsFiles = ['**/*.ts', '**/*.tsx', '!node_modules/**/*.*', 'typings/**/*.d.ts'];
 
@@ -96,6 +98,33 @@ function compile(modules) {
   rimraf.sync(modulesDir);
   // assets
   // less
+  const lessSources = [
+    'components/**/*.less',
+  ]
+  const lessRes = gulp
+    .src(lessSources)
+    .pipe(
+      through2.obj(function (file, encoding, next) {
+        // less clone
+        this.push(file.clone())
+        if (
+          file.path.match(/\/style\/index\.less$/)
+          ) {
+          // less to css
+          compileLess(file.path).then(css => {
+            file.contents = Buffer.from(css)
+            file.path = file.path.replace(/\.less$/, '.css')
+            this.push(file)
+            next()
+          }).catch(e => {
+            console.error('less file compile error: ', e)
+          })
+        } else {
+          next()
+        }
+      })
+    )
+    .pipe(gulp.dest(modulesDir))
   // ts
   let error = 0;
   const sources = [
@@ -123,7 +152,7 @@ function compile(modules) {
   tsRes.on('end', check);
   const tsFileStream = babelify(tsRes.js, modules); // ts 文件
   const tsd = tsRes.dts.pipe(gulp.dest(modulesDir)); // d.ts声明文件
-  return merge2([tsFileStream, tsd]);
+  return merge2([lessRes, tsFileStream, tsd]);
 }
 
 

@@ -3,10 +3,13 @@
     count: {{ count }}
     <k-button @click="handleClick">测试</k-button>
     <DemoBox />
+    <router-link to="/">home</router-link> | 
+    <router-link to="/components/button">button basic</router-link>
+    <router-view />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import DemoBox from "../../../components/DemoBox.vue";
 import { defineComponent, ref } from "vue";
 

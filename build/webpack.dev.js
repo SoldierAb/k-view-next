@@ -26,9 +26,11 @@ const getDevBabelConf = ()=>{
 
 const babelConf = getDevBabelConf()
 
+const testLoader =  (source)=>`<template>${source}</template>`
+
 const config = {
   mode: "development",
-  entry: path.resolve(__dirname, "../site/pages/dev/main.ts"),
+  entry: path.resolve(__dirname, "../site/pages/dev/main.js"),
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist"),
@@ -53,6 +55,15 @@ const config = {
   ],
   module: {
     rules: [
+      {
+        test:/\.md$/,
+        use: [
+          'vue-loader',
+          {
+            loader: path.resolve(__dirname, './md-loader/index.js')
+          }
+        ]
+      },
       // babel使用runtime，避免将不需要的代码注入
       {
         test: /\.(js|jsx)?$/,
