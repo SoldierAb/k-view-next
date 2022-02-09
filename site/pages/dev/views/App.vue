@@ -4,7 +4,7 @@
     <k-button @click="handleClick">测试</k-button>
     <DemoBox />
     <router-link to="/">home</router-link> | 
-    <router-link to="/components/button">button basic</router-link>
+    <router-link to="/components/button">button</router-link>
     <router-view />
   </div>
 </template>

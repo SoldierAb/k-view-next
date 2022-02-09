@@ -53,6 +53,7 @@ export default defineComponent({
     });
 
     return {
+      isShow,
       codeBlockRef,
       flodBtnInfo,
     };

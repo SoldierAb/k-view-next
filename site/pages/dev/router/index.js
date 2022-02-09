@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import count from '../../../../components/button/demos/count.vue'
 import basic from '../../../../components/button/demos/basic.vue'
 import ButtonMd from '../../../../components/button/README.zh-CN.md'
 import Home from '../views/Home.vue'
@@ -12,12 +13,12 @@ const routes = [
   },
   {
     path: "/components",
-    name: "components",
     component: ButtonMd,
     children: [
       {
         path: 'button',
         components: {
+          default: count,
           basic
         },
       }

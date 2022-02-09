@@ -34,8 +34,13 @@ const config = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist"),
+    publicPath: '/'
   },
   devServer: {
+    static: {
+      directory: path.join(__dirname, '../site/public'), // 指定静态资源解析文件夹
+    },
+    historyApiFallback: true, // web history mode fallback 
     hot: true,
     open: true,
   },
@@ -129,8 +134,8 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".md"],
     alias: {
-      "k-view-next": path.join(__dirname, "../components"),
       "k-view-next/es": path.join(__dirname, "../components"),
+      "k-view-next": path.join(__dirname, "../components"),
       process: "process/browser",
     },
   },

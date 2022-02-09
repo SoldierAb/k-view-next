@@ -12,7 +12,7 @@ export default defineComponent({
         const btnProps =  {
             ...attrs,
             class: [
-                'v-btn-container',
+                'k-btn-container',
                 attrs.class,
             ],
             onClick: handleClick
