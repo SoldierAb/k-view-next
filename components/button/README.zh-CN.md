@@ -17,3 +17,15 @@ title:
 
 ### 测试视图basic
 <router-view name="basic"/>
+
+
+### basic usage
+
+:::external
+
+```html
+<code src="./demos/basic.vue" ></code>
+```
+
+:::
+

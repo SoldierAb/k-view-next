@@ -8,7 +8,7 @@ const getBabelConf = require('./getBabelConf')
 
 const tsConf = require('../tsconfig.json')
 
-const getDevBabelConf = ()=>{
+const getDevBabelConf = () => {
   const bf = getBabelConf()
   // 设置缓存
   bf.cacheDirectory = true;
@@ -26,11 +26,15 @@ const getDevBabelConf = ()=>{
 
 const babelConf = getDevBabelConf()
 
-const testLoader =  (source)=>`<template>${source}</template>`
+const testLoader = (source) => `<template>${source}</template>`
 
 const config = {
   mode: "development",
   entry: path.resolve(__dirname, "../site/pages/dev/main.js"),
+  infrastructureLogging: {
+    level: 'log',
+    debug: [/md-loader/, (name) => (console.log(name, '\n\n'), `${name}`.includes('md'))],
+  },
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist"),
@@ -69,6 +73,10 @@ const config = {
           }
         ]
       },
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+      },
       // babel使用runtime，避免将不需要的代码注入
       {
         test: /\.(js|jsx)?$/,
@@ -93,17 +101,13 @@ const config = {
             options: {
               compilerOptions: {
                 ...tsConf.compilerOptions,
-                //  Vue3 template 编译缺陷, 需要设置为false, 参考 https://github.com/vuejs/core/issues/4668
+                //  FIXME: Vue3 template 编译缺陷, 需要设置为false, 参考 https://github.com/vuejs/core/issues/4668
                 noUnusedParameters: false,
               },
               appendTsSuffixTo: [/\.vue$/],
             },
           },
         ],
-      },
-      {
-        test: /\.vue$/,
-        loader: "vue-loader",
       },
       {
         test: /\.css$/,
@@ -134,7 +138,8 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".md"],
     alias: {
-      "k-view-next/es": path.join(__dirname, "../components"),
+      "k-view-next/lib": path.join(__dirname, "../lib"),
+      "k-view-next/es": path.join(__dirname, "../es"),
       "k-view-next": path.join(__dirname, "../components"),
       process: "process/browser",
     },

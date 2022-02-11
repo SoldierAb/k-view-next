@@ -34,7 +34,7 @@ module.exports = function (source) {
     if (codeTpl) {
       const externalDemoName = `ExternalDemo${id}`
       output.push(
-        `<template slot="instance"><${externalDemoName} /></template>`
+        `<template v-slot:instance><${externalDemoName} /></template>`
       )
       compScriptHeaderString += `import ${externalDemoName} from "${codeTpl}";`
       compInstancesString += `${externalDemoName},`
@@ -65,10 +65,12 @@ module.exports = function (source) {
     pageScript = content.slice(0, startIndex)
   }
 
+  console.log('comp script: ', pageScript)
+
   output.push(content.slice(startIndex))
   return `
       <template>
-        <div class="content">
+        <div class="external-demo-content">
           ${output.join('')}
         </div>
       </template>

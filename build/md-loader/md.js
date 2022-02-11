@@ -118,7 +118,7 @@ const fenceWrite = (md) => {
         cpText = encodeURIComponent(codeStr);
         codeHtml = md.utils.escapeHtml(codeStr);
       }
-      return `<template slot="code-box">
+      return `<template v-slot:code>
               <v-tip
                   trigger="hover"
                   content="copy code"

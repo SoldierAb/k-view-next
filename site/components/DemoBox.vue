@@ -4,13 +4,14 @@
       <slot name="instance" />
     </div>
     <div
-      :style="{ height: isShow ? `${codeBlockHeight}px` : '0' }"
       class="demo-content"
+      :style="`height: ${isShow ? codeBlockHeight : 0}px`"
     >
-      <div ref="code-block">
+      <div ref="codeBlockRef">
         <slot name="code" />
       </div>
     </div>
+    isShow: {{isShow}}  codeBlockHeight: {{codeBlockHeight}}
     <div
       :class="['demo-block-control', isShow ? '' : 'none-top-border']"
       @click="flodBtnInfo.clickCb"
@@ -48,14 +49,14 @@ export default defineComponent({
       return flodBtnMap[`${isShow.value}`];
     });
     onMounted(() => {
-      // codeBlockHeight.value = codeBlockRef.value?.$el?clientHeight + 40;
-      codeBlockHeight.value = 40;
+      codeBlockHeight.value = codeBlockRef.value?.clientHeight ?? + 40
     });
 
     return {
       isShow,
       codeBlockRef,
       flodBtnInfo,
+      codeBlockHeight
     };
   },
 });

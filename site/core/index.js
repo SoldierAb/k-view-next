@@ -1,7 +1,10 @@
 import KView from 'k-view-next'
-import 'k-view-next/es/style'
+import 'k-view-next/lib/style'
 
-export default (app)=>{
+import DemoBox from '../components/DemoBox.vue'
+
+export default (app) => {
+    app.component(DemoBox.name, DemoBox)
     app.use(KView)
     return app
 }
