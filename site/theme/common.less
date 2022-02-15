@@ -1,0 +1,148 @@
+@font-size-h1: 30px;
+@font-size-h2: 24px;
+@font-size-h3: 18px;
+
+.markdown-preview-box {
+    position: relative;
+    padding-right: 120px;
+    .anchor {
+      opacity: 0;
+      transition: opacity .3s ease;
+      margin-left: 8px;
+    }
+    .content {
+      width: calc(100% - 300px);
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 300;
+        font-family: @font-family;
+      }
+    }
+    color: #0d1a26;
+    .md-h {
+      font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
+      font-variant: tabular-nums;
+      margin: 1.6em 0 0.6em;
+      font-weight: 500;
+      clear: both;
+    }
+    h1,h2,h3,h4,h5{
+      &:hover{
+        .anchor {
+          opacity: 1;
+        }
+      }
+    }
+    h1 {
+      .md-h;
+      font-size: @font-size-h1;
+    }
+    h2 {
+      .md-h;
+      font-size: @font-size-h2;
+    }
+    h3 {
+      .md-h;
+      font-size: @font-size-h3;
+    }
+    .markdown-table,
+    .markdown-table table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+      border: 1px solid #ebedf0;
+      width: 100%;
+      margin: 8px 0 16px;
+      th {
+        border: 1px solid #ebedf0;
+        padding: 14px 16px;
+        text-align: left;
+        white-space: nowrap;
+        color: #5c6b77;
+        font-weight: 500;
+        background: rgba(0, 0, 0, 0.02);
+      }
+      tr {
+        border-bottom: 1px solid #e8e8e8;
+      }
+      td {
+        padding: 14px 16px;
+        border-width: 1px 0;
+        border-color: #e8e8e8;
+      }
+      td:first-child {
+        font-weight: 500;
+        width: 20%;
+        color: #003a8c;
+      }
+    }
+    .hljs {
+      line-height: 1.4;
+      font-size: 14px;
+      padding: 18px 24px;
+      -webkit-font-smoothing: auto;
+      margin: 0;
+      border: none;
+      max-height: none;
+      border-radius: 0;
+    }
+    // 锚点
+    .table-of-contents{
+      position: fixed;
+      right: 30px;
+      top: 80px;
+      z-index: 9;
+      background: white;
+      margin: 16px 0;
+      padding-left: 0;
+      font-size: 12px;
+      list-style: none;
+      border-left: 1px solid #f0f0f0;
+      transition: all .3s cubic-bezier(.78,.14,.15,.86);
+      ol, ul,li{
+        list-style: none;
+        padding:3px 4px;
+      }
+      // ol { counter-reset: list-item; }
+      // li { display: block; counter-increment: list-item; }
+      // li:before { content: counters(list-item,'.') ' '; }
+      .toc-nav-list{
+        padding:0 10px;
+      }
+      .toc-nav-item{
+        padding-left:2px;
+      }
+      .toc-nav-link{
+        color: black;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 140px;
+        display: block;
+        overflow: hidden;
+        &:active{
+          color: blue;
+        }
+      }
+    }
+}
+.pre-code {
+    font-family: "Lucida Console", Consolas, Monaco, "Andale Mono",
+        "Ubuntu Mono", monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}

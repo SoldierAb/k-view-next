@@ -1,0 +1,11 @@
+{
+    "basicComponents":{
+        "label":"基础组件",
+        "icon":"build",
+        "children":{
+            "KButton":{
+                "label":"按钮"
+            }
+        }
+    }
+}

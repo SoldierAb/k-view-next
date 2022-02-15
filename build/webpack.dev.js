@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require('webpack')
 const { IgnorePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -7,6 +8,21 @@ const { VueLoaderPlugin } = require("vue-loader");
 const getBabelConf = require('./getBabelConf')
 
 const tsConf = require('../tsconfig.json')
+
+
+// 加载.env 环境变量
+const injectEnv = require('./injectEnv')
+const defineVariables = injectEnv()
+
+const [demo] = [...process.argv].reverse()
+const demoPath = demo.replace(/\.\\|\.\/|\\|\/|['."]/g, ' ').trim().replace(/\s/g, '/')
+
+console.log('[current demo path] ', demoPath)
+
+defineVariables['process.env'].DemoPath = JSON.stringify(demoPath)
+
+const htmlInjectVals = injectEnv(true)
+
 
 const getDevBabelConf = () => {
   const bf = getBabelConf()
@@ -38,7 +54,8 @@ const config = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist"),
-    publicPath: '/'
+    publicPath: '/',
+    libraryTarget: 'umd',
   },
   devServer: {
     static: {
@@ -59,7 +76,14 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../site/public/index.html"),
+      templateParameters: {
+        ...htmlInjectVals
+      }
     }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    }),
+    new webpack.DefinePlugin(defineVariables),
     new VueLoaderPlugin(),
   ],
   module: {
@@ -122,8 +146,9 @@ const config = {
             loader: "less-loader",
             options: {
               lessOptions: {
+                // 主题定制
                 modifyVars: {
-                  "primary-color": "#4608e2",
+                  // "primary-color": "#4608e2",
                   "link-color": "#4608e2",
                   "border-radius-base": "20px",
                 },

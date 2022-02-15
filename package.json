@@ -7,10 +7,11 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "webpack-dev-server --config build/webpack.dev.js",
+    "dev": "yarn compile && node ./build/server.dev.js",
     "compile": "gulp compile"
   },
   "devDependencies": {
+    "@ant-design/icons-vue": "^6.0.1",
     "@babel/core": "^7.16.7",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-export-default-from": "^7.16.7",
@@ -24,12 +25,14 @@
     "@babel/preset-typescript": "^7.16.7",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/compiler-sfc": "^3.2.27",
+    "ant-design-vue": "^2.2.8",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
     "babel-plugin-import": "^1.13.3",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
+    "dotenv": "^16.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-strip-code": "^0.1.4",
@@ -66,6 +69,5 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3",
     "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {}
+  }
 }

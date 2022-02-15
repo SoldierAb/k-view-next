@@ -18,7 +18,7 @@ export default defineComponent({
             onClick: handleClick
         }
         const child = slots.default?.()
-        return ()=> {
+        return () => {
             return <button {...btnProps}>{child}</button>
         }
     }

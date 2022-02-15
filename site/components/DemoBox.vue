@@ -11,21 +11,21 @@
         <slot name="code" />
       </div>
     </div>
-    isShow: {{isShow}}  codeBlockHeight: {{codeBlockHeight}}
-    <div
-      :class="['demo-block-control', isShow ? '' : 'none-top-border']"
-      @click="flodBtnInfo.clickCb"
-    >
-      <em :class="flodBtnInfo.iconClass"/>
-      <span class="text">{{ flodBtnInfo.text }}</span>
+    <div class="act-btns">
+      <slot name="copy" />
+      <code-outlined @click="flodCode" />
     </div>
   </div>
 </template>
 <script>
 import { ref, computed, onMounted, defineComponent } from "vue";
+import { CodeOutlined } from '@ant-design/icons-vue'
 
 export default defineComponent({
   name: "DemoBox",
+  components: {
+    CodeOutlined
+  },
   setup() {
     const codeBlockRef = ref(null);
     const codeBlockHeight = ref(0);
@@ -33,29 +33,14 @@ export default defineComponent({
     const flodCode = () => {
       isShow.value = !isShow.value;
     };
-    const flodBtnInfo = computed(() => {
-      const flodBtnMap = {
-        true: {
-          text: "隐藏代码",
-          iconClass: "el-icon-caret-top",
-          clickCb: flodCode,
-        },
-        false: {
-          text: "显示代码",
-          iconClass: "el-icon-caret-bottom",
-          clickCb: flodCode,
-        },
-      };
-      return flodBtnMap[`${isShow.value}`];
-    });
     onMounted(() => {
       codeBlockHeight.value = codeBlockRef.value?.clientHeight ?? + 40
     });
 
     return {
       isShow,
+      flodCode,
       codeBlockRef,
-      flodBtnInfo,
       codeBlockHeight
     };
   },
@@ -116,44 +101,16 @@ export default defineComponent({
     background-color: #f8f8f8;
   }
 }
-.demo-block-control {
-  border: 1px solid #eaeefb;
-  height: 44px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  text-align: center;
-  margin-top: -1px;
-  color: #d3dce6;
-  cursor: pointer;
+.act-btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   position: relative;
-  i {
-    font-size: 16px;
-    line-height: 44px;
-    transition: 0.3s;
-  }
-  text {
-    line-height: 44px;
-  }
-  .text {
-    display: none;
-    transition: 0.3s;
-    margin-right: 8px;
-  }
-  &:hover {
-    color: #409eff;
-    background-color: #f9fafc;
-    i {
-      transform: translateX(-10px);
-    }
-    .text {
-      display: inline-block;
-      // transform: translateX(-20px);
-    }
-  }
-  &.none-top-border {
-    border-top: 0;
-  }
+  height: 44px;
+  line-height: 44px;
+  padding: 0 20px;
+  border: 1px solid #eaeefb;
+  background-color: #fff;
+  cursor: pointer;
 }
 </style>

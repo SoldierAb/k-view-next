@@ -119,20 +119,15 @@ const fenceWrite = (md) => {
         codeHtml = md.utils.escapeHtml(codeStr);
       }
       return `<template v-slot:code>
-              <v-tip
-                  trigger="hover"
-                  content="copy code"
-                  :text-width="20"
-                  class="clipboard-btn"
-                  data-clipboard-text="${cpText}"
-              >
-                  <a-icon
-                    type="copy"
-                  />
-              </v-tip>
               <pre v-pre>
                   <code class="pre-code html">${codeHtml}</code>
               </pre>
+          </template>
+          <template v-slot:copy>
+            <copy-outlined
+              class="clipboard-btn"
+              data-clipboard-text="${cpText}"
+            />
           </template>`;
     }
     return defaultRender(tokens, idx, options, env, self);
