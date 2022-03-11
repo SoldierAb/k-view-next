@@ -1,6 +1,11 @@
 import { defineComponent } from 'vue'
 import buttonTypes from './buttonTypes'
 
+export interface ButtonLocale {
+    OkText: string;
+    CancelText: string;
+}
+
 export default defineComponent({
     name: 'KButton',
     props: buttonTypes(),
