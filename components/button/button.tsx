@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue'
 import buttonTypes from './buttonTypes'
+import { useLocaleReceiver } from '../config-provider'
 
 export interface ButtonLocale {
     OkText: string;
@@ -11,6 +12,9 @@ export default defineComponent({
     props: buttonTypes(),
     emits: ['click'],
     setup(_, { attrs, slots, emit }) {
+        // 多语言注入
+        const locale = useLocaleReceiver('Button')
+        console.log('button inject locale', locale)
         const handleClick = (ev: Event) => {
             emit('click', ev)
         }
@@ -24,7 +28,11 @@ export default defineComponent({
         }
         const child = slots.default?.()
         return () => {
-            return <button {...btnProps}>{child}</button>
+            return <button {...btnProps}>
+                {child}
+                {locale.value.OkText}
+                {locale.value.CancelText}
+            </button>
         }
     }
 })
