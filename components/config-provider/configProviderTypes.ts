@@ -1,10 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { ButtonLocale } from '../button/button'
-
-
-export interface  Locale {
-    Button: ButtonLocale
-}
+import type { Locale } from './localeTypes';
 
 
 const configProviderProps = {

@@ -7,7 +7,8 @@ import {
   computed,
   watch,
 } from "vue";
-import configProviderTypes, { Locale } from "./configProviderTypes";
+import configProviderTypes from "./configProviderTypes";
+import type { Locale } from './localeTypes'
 
 const ConfigProvider = defineComponent({
   name: "KConfigProvider",
@@ -18,9 +19,10 @@ const ConfigProvider = defineComponent({
     const configData = reactive({
       ...props,
     });
-    // 全局前缀注入
+    // TODO: 全局前缀注入
+
+    // 监听注入的全局数据
     Object.keys(props).forEach((key) => {
-      console.log("props key==> ", key);
       watch(
         () => props[key],
         () => {
@@ -28,6 +30,7 @@ const ConfigProvider = defineComponent({
         }
       );
     });
+
     provide("config", configData);
 
     return () => {
@@ -50,7 +53,6 @@ export function useLocaleReceiver<T extends LocaleComponent>(
   compName: T
 ): ComputedRef<Locale[T]> {
   const config = inject<LocalReceiverCtx>("config", {} as LocalReceiverCtx);
-  console.log("config--> ", config);
   return computed<Locale[T]>(() => {
     const { locale } = config;
     return locale && compName ? locale[compName] : {};
