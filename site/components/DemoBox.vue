@@ -10,9 +10,9 @@
       <div ref="codeBlockRef">
         <slot name="code" />
       </div>
+      <slot name="copy" />
     </div>
     <div class="act-btns">
-      <slot name="copy" />
       <code-outlined @click="flodCode" />
     </div>
   </div>

@@ -14,4 +14,19 @@ There are `primary` button, `default` button, `dashed` button, `text` button and
 
 ### basic usage
 
-<code src="./demos/basic.vue" />
+<router-view />
+
+
+
+### test view count
+<router-view name="count"/>
+
+### language support
+
+:::external
+
+```html
+<code src="./demos/lang.vue" />
+
+```
+:::

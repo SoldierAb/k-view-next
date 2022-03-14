@@ -1,5 +1,5 @@
 <template>
-  [<em>default</em>]<br/>
+  [<em>count</em>]<br/>
   count+++--> {{count}}
   <k-button @click="upFn">Default Button</k-button>
 </template>
