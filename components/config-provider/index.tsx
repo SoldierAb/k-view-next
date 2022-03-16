@@ -11,14 +11,36 @@ import configProviderTypes, {
   ConfigProviderProps,
 } from "./configProviderTypes";
 import type { Locale } from "./localeTypes";
-
-export const rootProviderKey = "rootProviderData";
-
-export const rootPrefixCls = "k";
+import { rootPrefixCls, rootProviderKey } from '../_constants/root'
 
 export const defaultRootConfig: UnwrapRef<ConfigProviderProps> = reactive({
   prefixCls: rootPrefixCls,
 });
+
+
+type LocaleComponent = keyof Locale;
+
+interface LocaleInterface {
+  [key: string]: any;
+}
+
+export interface LocalReceiverCtx {
+  locale?: LocaleInterface;
+}
+
+export function useLocaleReceive<T extends LocaleComponent>(
+  compName: T
+): ComputedRef<Locale[T]> {
+  const config = inject<LocalReceiverCtx>(
+    rootProviderKey,
+    {} as LocalReceiverCtx
+  );
+  return computed<Locale[T]>(() => {
+    const { locale } = config;
+    return locale && compName ? locale[compName] : {};
+  });
+}
+
 
 const ConfigProvider = defineComponent({
   name: "KConfigProvider",
@@ -47,29 +69,6 @@ const ConfigProvider = defineComponent({
     };
   },
 });
-
-type LocaleComponent = keyof Locale;
-
-interface LocaleInterface {
-  [key: string]: any;
-}
-
-export interface LocalReceiverCtx {
-  locale?: LocaleInterface;
-}
-
-export function useLocaleReceiver<T extends LocaleComponent>(
-  compName: T
-): ComputedRef<Locale[T]> {
-  const config = inject<LocalReceiverCtx>(
-    rootProviderKey,
-    {} as LocalReceiverCtx
-  );
-  return computed<Locale[T]>(() => {
-    const { locale } = config;
-    return locale && compName ? locale[compName] : {};
-  });
-}
 
 ConfigProvider.install = (app: App) => {
   app.component(ConfigProvider.name, ConfigProvider);

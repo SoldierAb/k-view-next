@@ -1,6 +1,7 @@
 import type { UnwrapRef, ComputedRef } from 'vue'
 import { inject, computed  } from 'vue'
-import { rootProviderKey, defaultRootConfig, rootPrefixCls } from '../config-provider/index'
+import { rootPrefixCls, rootProviderKey } from '../_constants/root'
+import { defaultRootConfig } from '../config-provider/index'
 import type { ConfigProviderProps } from '../config-provider/configProviderTypes'
 
 

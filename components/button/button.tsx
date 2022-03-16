@@ -1,6 +1,6 @@
 import { computed, defineComponent } from "vue";
 import buttonTypes from "./buttonTypes";
-import { useLocaleReceiver } from "../config-provider";
+import { useLocaleReceive } from "../config-provider";
 import useConfigInject from "../_hooks/useConfigInject";
 
 export interface ButtonLocale {
@@ -14,7 +14,7 @@ export default defineComponent({
   emits: ["click"],
   setup(_, { attrs, emit }) {
     // 多语言注入
-    const locale = useLocaleReceiver("Button");
+    const locale = useLocaleReceive("Button");
     const handleClick = (ev: Event) => {
       if (attrs.disabled) {
         ev.preventDefault()
