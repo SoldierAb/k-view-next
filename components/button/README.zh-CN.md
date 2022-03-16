@@ -30,6 +30,16 @@ title:
 
 :::
 
+### 禁用状态
+
+:::external
+
+```html
+<code src="./demos/disabled.vue" ></code>
+```
+
+:::
+
 ### 多语言支持
 
 :::external
@@ -50,4 +60,7 @@ title:
 
 ```
 :::
+
+
+
 

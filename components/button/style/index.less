@@ -6,5 +6,9 @@
     &-container{
         position: relative;
         color: @primary-color;
+        &[disabled]{
+            cursor: not-allowed;
+            color: grey;
+        }
     }
 }
