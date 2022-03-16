@@ -3,6 +3,9 @@ import type { Locale } from './localeTypes';
 
 
 const configProviderProps = {
+    prefixCls: {
+        type: String
+    },
     getPrefixCls: {
         // 组件后缀，自定义前缀
         type: Function as PropType<(suffix?: string, customizePrefix?: string)=> string> 

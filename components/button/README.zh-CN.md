@@ -40,3 +40,14 @@ title:
 ```
 :::
 
+
+### 自定义样式
+
+:::external
+
+```html
+<code src="./demos/class.vue" />
+
+```
+:::
+

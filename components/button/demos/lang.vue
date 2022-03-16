@@ -1,13 +1,13 @@
 <template>
   [<em>多语言</em>]<br/>
   <div>
-  currentLang {{currentLang}}
+  本地多语言配置注入 localeData: {{localeData}}
   </div>
   <div>
-  localeData: {{localeData}}
+  当前语言 currentLang： {{currentLang}}
   </div>
   <k-config-provider :locale="locale">
-    <k-button @click="upFn">Button</k-button>
+    <k-button @click="langToggle">点击切换语言-</k-button>
   </k-config-provider>
 </template>
 
@@ -16,7 +16,7 @@ import { ref, computed } from 'vue'
 export default {
   setup(){
     const currentLang = ref('zh-CN')
-    const upFn =  ()=>{
+    const langToggle =  ()=>{
       currentLang.value =  currentLang.value === 'en-US'? 'zh-CN': 'en-US'
     }
     // 多语言注入
@@ -38,7 +38,7 @@ export default {
       return localeData[[currentLang.value]]
     })
     return {
-      upFn,
+      langToggle,
       locale,
       localeData,
       currentLang

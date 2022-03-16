@@ -1,4 +1,4 @@
-import type { App, ComputedRef, Plugin } from "vue";
+import type { App, ComputedRef, Plugin, UnwrapRef } from "vue";
 import {
   defineComponent,
   provide,
@@ -7,20 +7,29 @@ import {
   computed,
   watch,
 } from "vue";
-import configProviderTypes from "./configProviderTypes";
-import type { Locale } from './localeTypes'
+import configProviderTypes, {
+  ConfigProviderProps,
+} from "./configProviderTypes";
+import type { Locale } from "./localeTypes";
+
+export const rootProviderKey = "rootProviderData";
+
+export const rootPrefixCls = "k";
+
+export const defaultRootConfig: UnwrapRef<ConfigProviderProps> = reactive({
+  prefixCls: rootPrefixCls,
+});
 
 const ConfigProvider = defineComponent({
   name: "KConfigProvider",
   inheritAttrs: false,
   props: configProviderTypes,
   setup(props, { slots }) {
-    // 多语言注入
+    // 全局配置数据
     const configData = reactive({
+      ...defaultRootConfig,
       ...props,
     });
-    // TODO: 全局前缀注入
-
     // 监听注入的全局数据
     Object.keys(props).forEach((key) => {
       watch(
@@ -31,7 +40,7 @@ const ConfigProvider = defineComponent({
       );
     });
 
-    provide("config", configData);
+    provide(rootProviderKey, configData);
 
     return () => {
       return slots.default?.();
@@ -52,7 +61,10 @@ export interface LocalReceiverCtx {
 export function useLocaleReceiver<T extends LocaleComponent>(
   compName: T
 ): ComputedRef<Locale[T]> {
-  const config = inject<LocalReceiverCtx>("config", {} as LocalReceiverCtx);
+  const config = inject<LocalReceiverCtx>(
+    rootProviderKey,
+    {} as LocalReceiverCtx
+  );
   return computed<Locale[T]>(() => {
     const { locale } = config;
     return locale && compName ? locale[compName] : {};

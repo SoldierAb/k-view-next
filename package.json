@@ -8,7 +8,8 @@
   "private": false,
   "scripts": {
     "dev": "yarn compile && node ./build/server.dev.js",
-    "compile": "gulp compile"
+    "compile": "gulp compile",
+    "commit":"git add . && git-cz"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "^6.0.1",
@@ -33,6 +34,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "dotenv": "^16.0.0",
+    "git-cz": "^4.8.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-strip-code": "^0.1.4",

@@ -1,38 +1,52 @@
-import { defineComponent } from 'vue'
-import buttonTypes from './buttonTypes'
-import { useLocaleReceiver } from '../config-provider'
+import { computed, defineComponent } from "vue";
+import buttonTypes from "./buttonTypes";
+import { useLocaleReceiver } from "../config-provider";
+import useConfigInject from "../_hooks/useConfigInject";
 
 export interface ButtonLocale {
-    OkText: string;
-    CancelText: string;
+  OkText: string;
+  CancelText: string;
 }
 
 export default defineComponent({
-    name: 'KButton',
-    props: buttonTypes(),
-    emits: ['click'],
-    setup(_, { attrs, slots, emit }) {
-        // 多语言注入
-        const locale = useLocaleReceiver('Button')
-        console.log('button inject locale', locale)
-        const handleClick = (ev: Event) => {
-            emit('click', ev)
-        }
-        const btnProps =  {
-            ...attrs,
-            class: [
-                'k-btn-container',
-                attrs.class,
-            ],
-            onClick: handleClick
-        }
-        const child = slots.default?.()
-        return () => {
-            return <button {...btnProps}>
-                {child}
-                {locale.value.OkText}
-                {locale.value.CancelText}
-            </button>
-        }
-    }
-})
+  name: "KButton",
+  props: buttonTypes(),
+  emits: ["click"],
+  setup(_, { attrs, emit }) {
+    // 多语言注入
+    const locale = useLocaleReceiver("Button");
+    const handleClick = (ev: Event) => {
+      if (attrs.disabled) {
+        ev.preventDefault()
+        return
+      }
+      emit("click", ev);
+    };
+    // 全局前缀获取
+    const { prefixCls } = useConfigInject()
+    const classes = computed(() => {
+      const pre = prefixCls.value
+      return [`${pre}-btn-container`, attrs.class]
+    })
+    const btnProps = {
+      ...attrs,
+      class: classes.value,
+      onClick: handleClick,
+    };
+    return {
+      btnProps,
+      locale,
+    };
+  },
+  render() {
+    const { locale, btnProps, $slots } = this;
+    const child = $slots.default?.();
+    return (
+      <button {...btnProps}>
+        {child}
+        {locale.OkText}
+        {locale.CancelText}
+      </button>
+    );
+  },
+});
