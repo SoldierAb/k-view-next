@@ -1,4 +1,4 @@
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, toRefs } from "vue";
 import buttonTypes from "./buttonTypes";
 import { useLocaleReceive } from "../config-provider";
 import useConfigInject from "../_hooks/useConfigInject";
@@ -12,7 +12,7 @@ export default defineComponent({
   name: "KButton",
   props: buttonTypes(),
   emits: ["click"],
-  setup(_, { attrs, emit }) {
+  setup(props, { attrs, emit }) {
     // 多语言注入
     const locale = useLocaleReceive("Button");
     const handleClick = (ev: Event) => {
@@ -22,11 +22,11 @@ export default defineComponent({
       }
       emit("click", ev);
     };
-    // 全局前缀获取
     const { prefixCls } = useConfigInject()
+    const { type } = toRefs(props)
     const classes = computed(() => {
       const pre = prefixCls.value
-      return [`${pre}-btn-container`, attrs.class]
+      return [`${pre}-btn-container`, `${pre}-btn-${type.value}`,attrs.class]
     })
     const btnProps = {
       ...attrs,

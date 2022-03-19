@@ -17,7 +17,7 @@ const defineVariables = injectEnv()
 const [demo] = [...process.argv].reverse()
 const demoPath = demo.replace(/\.\\|\.\/|\\|\/|['."]/g, ' ').trim().replace(/\s/g, '/')
 
-console.log('[current demo path] ', demoPath)
+console.log('[current demo path] ', demoPath, process.argv)
 
 defineVariables['process.env'].DemoPath = JSON.stringify(demoPath)
 
@@ -49,7 +49,7 @@ const config = {
   entry: path.resolve(__dirname, "../site/pages/dev/main.js"),
   infrastructureLogging: {
     level: 'log',
-    debug: [/md-loader/, (name) => (console.log(name, '\n\n'), `${name}`.includes('md'))],
+    // debug: [/md-loader/, (name) => (console.log(name, '\n\n'), `${name}`.includes('md'))],
   },
   output: {
     filename: "index.js",

@@ -95,7 +95,7 @@ function babelify(js, modules) {
 
 function compile(modules) {
   const modulesDir = modules !== false ? libDir : esDir;
-  rimraf.sync(modulesDir);
+  // rimraf.sync(modulesDir);
   // assets
   // less
   const lessSources = [
@@ -156,7 +156,6 @@ function compile(modules) {
 }
 
 
-let startTime = new Date();
 gulp.task('compile-with-es', done => {
   console.log('start compile at ', startTime);
   console.log('[Parallel] Compile to es...');
@@ -168,11 +167,27 @@ gulp.task('compile-with-lib', done => {
   compile().on('finish', done);
 });
 
+gulp.task('clean-lib-es', done => {
+  rimraf.sync(libDir);
+  rimraf.sync(esDir);
+  done()
+})
+
+let startTime = new Date();
 gulp.task(
   'compile',
-  gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
+  gulp.series('clean-lib-es', gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
     console.log('end compile at ', new Date());
     console.log('compile time ', (new Date() - startTime) / 1000, 's');
     done();
   }),
 );
+
+gulp.task(
+  'compile-watch',
+  done => {
+    gulp.watch(['components/**/*'], gulp.parallel('compile-with-es', 'compile-with-lib'))
+    done();
+  }
+)
+
