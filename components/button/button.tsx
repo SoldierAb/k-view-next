@@ -26,7 +26,7 @@ export default defineComponent({
     const { type } = toRefs(props)
     const classes = computed(() => {
       const pre = prefixCls.value
-      return [`${pre}-btn-container`, `${pre}-btn-${type.value}`,attrs.class]
+      return [`${pre}-btn-container`, `${pre}-btn-${type.value||'default'}`,attrs.class]
     })
     const btnProps = {
       ...attrs,
@@ -35,7 +35,7 @@ export default defineComponent({
     };
     return {
       btnProps,
-      locale,
+      locale
     };
   },
   render() {

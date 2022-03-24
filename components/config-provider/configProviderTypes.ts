@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { Locale } from './localeTypes';
 
-
+// TODO: 全局注入配置
 const configProviderProps = {
     prefixCls: {
         type: String

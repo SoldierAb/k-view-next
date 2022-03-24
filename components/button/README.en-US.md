@@ -8,7 +8,7 @@ title:
 ---
 
 
-There are `primary` button, `default` button, `dashed` button, `text` button and `link` button in antd.
+There are `default` button, `primary` button,  `success` button, `warning` button, `danger` button and button-group in k-view-next.
 
 </docs>
 

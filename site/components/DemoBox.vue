@@ -19,12 +19,12 @@
 </template>
 <script>
 import { ref, computed, onMounted, defineComponent } from "vue";
-import { CodeOutlined } from '@ant-design/icons-vue'
+import { CodeOutlined } from "@ant-design/icons-vue";
 
 export default defineComponent({
   name: "DemoBox",
   components: {
-    CodeOutlined
+    CodeOutlined,
   },
   setup() {
     const codeBlockRef = ref(null);
@@ -34,23 +34,24 @@ export default defineComponent({
       isShow.value = !isShow.value;
     };
     onMounted(() => {
-      codeBlockHeight.value = codeBlockRef.value?.clientHeight ?? + 40
+      codeBlockHeight.value = codeBlockRef.value?.clientHeight ?? + 40;
     });
 
     return {
       isShow,
       flodCode,
       codeBlockRef,
-      codeBlockHeight
+      codeBlockHeight,
     };
   },
 });
 </script>
 
 <style lang="less">
+@border-color: #ebebeb;
 .demo-box-container {
   height: auto;
-  border: 1 px solid #ebebeb;
+  border: 1px solid @border-color;
   border-radius: 3 px;
   transition: 0.2s;
   margin: 10px 0;
@@ -81,10 +82,8 @@ export default defineComponent({
   }
 
   .demo-box {
-    border-top: 1 px solid #eaeefb;
     overflow: hidden;
-    border: 1px solid #ebedf0;
-    border-radius: 2px;
+    border: 1px solid @border-color;
     width: 100%;
     position: relative;
     transition: height 0.5s;
@@ -94,10 +93,12 @@ export default defineComponent({
     .demo-box;
     background-color: #fff;
     padding: 16px 24px;
-    border-bottom: 0;
+    border-bottom: 1px solid @border-color;
   }
   .demo-content {
     .demo-box;
+    border-top: none;
+    border-bottom: none;
     background-color: #f8f8f8;
   }
 }
@@ -109,7 +110,7 @@ export default defineComponent({
   height: 44px;
   line-height: 44px;
   padding: 0 20px;
-  border: 1px solid #eaeefb;
+  border: 1px solid @border-color;
   background-color: #fff;
   cursor: pointer;
 }

@@ -5,19 +5,19 @@
 }
 
 // 按钮基础样式
-.base(){
+.btn(){
     position: relative;
     display: inline-block;
     outline: 0;
     text-align: center;
     border: 1px solid  @border-color-base;
     border-radius: 2px;
-    background: white;
+    background: @text-color-white;
     overflow: hidden;
     padding: 3px 7px;
-    &:active{
-        transform: translate3d(1px, 2px,0);
-    }
+    // &:active{
+    //     transform: translate3d(1px, 2px,0);
+    // }
     &:hover,
     &:focus{
         cursor: pointer;
