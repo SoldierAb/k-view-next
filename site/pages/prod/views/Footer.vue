@@ -5,8 +5,8 @@ export default {
       <div class="footer-container">
         <span>All rights reserved | © 2022-present</span>
         <span>
-          Contact:
-          <a href="dingtalk://dingtalkclient/action/sendmsg?dingtalk_id=chenguijian24"> Cgj</a>
+          Contact：&nbsp;
+          <a href="dingtalk://dingtalkclient/action/sendmsg?dingtalk_id=chenguijian24">SoldierAb</a>
         </span>
       </div>
     );

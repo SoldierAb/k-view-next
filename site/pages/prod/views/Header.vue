@@ -15,8 +15,8 @@ export default {
     return (
       <div class="header-container">
         <h2 onClick={this.jumpHome}>
-          <a-avatar shape="square" size={46} src={`${BaseUrl}logo.svg`} />
-          <span class="lib-name">K-View-Next</span>
+          <a-avatar shape="square" size={46} src={`${BaseUrl}logo.png`} />
+          <span class="lib-name">k-view-next</span>
         </h2>
         <NavMenu />
       </div>

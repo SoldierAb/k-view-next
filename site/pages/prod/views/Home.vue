@@ -18,6 +18,7 @@ export default {
        <Banner />
        <div class="home-name-box">
         <h1>
+          K-View-next
           <ATag style="transform: translate3d(10px,-30px,0)">v{pkg.version}</ATag>
         </h1>
         <span class="home-item-box home-description">
@@ -29,7 +30,7 @@ export default {
           </span>
         </span>
         <span class="home-item-box">
-          <AButton type="primary" onClick={this.quickStart}>快速开始</AButton>
+          <KButton type="warning" onClick={this.quickStart}>快速开始</KButton>
         </span>
        </div>
        <div class="footer-box">
@@ -59,7 +60,6 @@ export default {
     }
     .home-description{
       font-size: 18px;
-      color: #d7e038;
     }
     .home-item-box{
       padding: 10px 0;
