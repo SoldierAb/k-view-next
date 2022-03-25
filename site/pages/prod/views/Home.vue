@@ -18,7 +18,6 @@ export default {
        <Banner />
        <div class="home-name-box">
         <h1>
-          TQT-Components
           <ATag style="transform: translate3d(10px,-30px,0)">v{pkg.version}</ATag>
         </h1>
         <span class="home-item-box home-description">

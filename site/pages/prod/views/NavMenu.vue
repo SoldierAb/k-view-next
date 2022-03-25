@@ -6,15 +6,11 @@ export default {
   data () {
     return {
       navProps: {
-        props: {
-          dataSource: navMenuDataSource,
-        },
-        attrs: {
-          openKeys: [],
-          selectedKeys: [],
-          mode: 'horizontal',
-          router: true,
-        },
+        dataSource: navMenuDataSource,
+        openKeys: [],
+        selectedKeys: [],
+        mode: 'horizontal',
+        router: true,
       },
     };
   },
@@ -29,10 +25,10 @@ export default {
       this.setSelectedKeys();
     },
     onOpenChange (openKeys) {
-      this.navProps.attrs.openKeys = openKeys;
+      this.navProps.openKeys = openKeys;
     },
     onSelect ({ selectedKeys }) {
-      if (selectedKeys[0] === 'Gitlab' || selectedKeys[0] === 'CHANGELOG') {
+      if (selectedKeys[0] === 'Github' || selectedKeys[0] === 'CHANGELOG') {
         window.open(navMenuDataSource[selectedKeys[0]].link);
         return;
       }
@@ -40,7 +36,7 @@ export default {
     },
     setSelectedKeys () {
       const [, selectedKey] = this.$route.path.split('/');
-      this.navProps.attrs.selectedKeys = selectedKey ? [selectedKey] : [];
+      this.navProps.selectedKeys = selectedKey ? [selectedKey] : [];
     },
   },
   render () {

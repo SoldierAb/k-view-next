@@ -20,7 +20,7 @@ import compJson from '../../../../components.json';
         path: `/${routeBase}/${nodeKey}`,
       };
       if (!children) {
-        item.component = ()=>import(`../../../../src/${nodeKey}/README.md`);
+        item.component = ()=>import(`../../../../components/${key}/README.zh-CN.md`);
         prev.push(item);
       }else {
         prev.push(...dpFn(children, key));
@@ -63,10 +63,10 @@ export const documentsDataSource = {
 
 export const menuDataSource = (()=>{
   return {
-      Architecture: {
-        label: '架构设计',
-        icon: 'sketch',
-      },
+    Architecture: {
+      label: '架构设计',
+      icon: 'sketch',
+    },
       ...compJson,
     };
 })();
@@ -88,7 +88,7 @@ export const routes = [
           component: ()=> import('../../../../docs/Architecture.md'),
         },
     ].concat(
-      getComponentsRoutes(menuDataSource),
+      getComponentsRoutes(compJson),
     ),
   },
   {

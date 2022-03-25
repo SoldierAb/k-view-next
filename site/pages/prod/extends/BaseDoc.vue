@@ -1,55 +1,54 @@
 <script>
-import MenuTree from '../../../components/MenuTree.vue';
+import MenuTree from "../../../components/MenuTree.vue";
 
 export default {
-  data () {
+  data() {
     return {
       menuProps: {
-        props: {},
-        attrs: {
-          openKeys: [],
-          selectedKeys: [],
-          theme: 'light',
-          mode: 'inline',
-        },
+        openKeys: [],
+        selectedKeys: [],
+        theme: "light",
+        mode: "inline",
         style: {
-          // width: '256px'
+          width: "256px",
         },
       },
     };
   },
   watch: {
-    '$route.path': 'setSelectedKeys',
+    "$route.path": "setSelectedKeys",
   },
-  mounted () {
+  mounted() {
     this.init();
   },
   methods: {
-    init () {
-      const [,, openKey] = this.$route.path.split('/');
+    init() {
+      const [, , openKey] = this.$route.path.split("/");
       this.onOpenChange([openKey]);
       this.setSelectedKeys();
       this.autoScrollAnchor();
     },
-    autoScrollAnchor () {
-      const [, anchor] = this.$route.hash.split('#');
+    autoScrollAnchor() {
+      const [, anchor] = this.$route.hash.split("#");
       document.getElementById(anchor)?.scrollIntoView();
     },
-    onOpenChange (openKeys) {
-      this.menuProps.attrs.openKeys = openKeys;
+    onOpenChange(openKeys) {
+      console.log(this.menuProps);
+      this.menuProps.openKeys = openKeys;
     },
     // onSelect ({ item, key, selectedKeys }) {
-    onSelect ({ selectedKeys }) {
+    onSelect({ selectedKeys }) {
       this.$router.push(`/${selectedKeys[0]}`);
     },
-    setSelectedKeys () {
+    setSelectedKeys() {
       const { path } = this.$route;
-      const pathArr = path.split('/');
-      const selectedKeys = pathArr.length === 2 ? [path.slice(1)] : [pathArr.slice(2).join('/')];
-      this.menuProps.attrs.selectedKeys = selectedKeys;
+      const pathArr = path.split("/");
+      const selectedKeys =
+        pathArr.length === 2 ? [path.slice(1)] : [pathArr.slice(2).join("/")];
+      this.menuProps.selectedKeys = selectedKeys;
     },
   },
-  render () {
+  render() {
     const { menuProps, onOpenChange, onSelect } = this;
     return (
       <div class="preview-components-container">
@@ -58,7 +57,7 @@ export default {
             {...menuProps}
             onOpenChange={onOpenChange}
             onSelect={onSelect}
-            style={{ height: '100%' }}
+            style={{ height: "100%" }}
           />
         </section>
         <section class="markdown-preview-box section-box">
@@ -92,7 +91,7 @@ export default {
     width: calc(~"100% - @{menu-width}");
     height: 100%;
     overflow: auto;
-    padding: 40px 40px 100px 40px;
+    padding: 40px 240px 100px 40px;
     border: 1px solid @border-color-light;
   }
   .pre-code {

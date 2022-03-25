@@ -1,50 +1,44 @@
-import '../../core';
 import '../../../scripts/version';
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createApp, nextTick } from 'vue';
+import { createRouter, createWebHistory } from "vue-router";
 import { routes } from './router';
 import App from './views/App.vue';
-import i18n from '../../i18n';
+import core from "../../core";
 import './public-path';
 
 const packageName = require('../../../package.json').name;
-
-Vue.use(VueRouter);
 
 let instance = null;
 let router = null;
 
 function render () {
   // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染
-  router = new VueRouter({
-    // 运行在主应用中时，添加路由命名空间 /vue
-    base: window.__POWERED_BY_QIANKUN__ ? `/${packageName}` : '/',
-    mode: 'history',
-    routes,
-  });
+  // 运行在主应用中时，添加路由命名空间 /vue
+  const routeBase = window.__POWERED_BY_QIANKUN__ ? `/${packageName}` : '/'
+  router = createRouter({
+    history: createWebHistory(routeBase),
+    routes
+  })
 
   router.beforeEach((to, from, next) => {
     document.title = to.meta.title || '';
     next();
   });
 
-  router.afterEach((
-    // to, from, next
-  ) => {
+  router.afterEach(async () =>{
     window.scrollTo(0, 0);
-    Vue.nextTick(() => {
-      document.querySelectorAll('pre code').forEach((block) => {
-        // eslint-disable-next-line no-undef
-        hljs.highlightBlock(block);
-      });
+    await nextTick()
+    document.querySelectorAll("pre code").forEach((block) => {
+      // eslint-disable-next-line no-undef
+      hljs.highlightBlock(block);
     });
   });
 
-  instance = new Vue({
-    router,
-    i18n,
-    render: (h) => h(App),
-  }).$mount('#root');
+  instance = createApp(App)
+
+  console.log(instance)
+
+  core(instance).use(router).mount('#app');
 }
 
 // 独立运行时，直接挂载应用

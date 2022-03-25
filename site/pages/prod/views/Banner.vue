@@ -39,12 +39,7 @@ export default {
                 <svg>
                   <defs>
                     <filter id="banner-circle-shadow-1">
-                      <feDropShadow
-                        dx="10"
-                        dy="10"
-                        stdDeviation="10"
-                        flood-color="rgba(0,0,0,0.05)"
-                      ></feDropShadow>
+                     
                     </filter>
                     <linearGradient
                       id="banner-circle-fill-1"
@@ -86,12 +81,7 @@ export default {
                 <svg>
                   <defs>
                     <filter id="banner-circle-shadow-2">
-                      <feDropShadow
-                        dx="10"
-                        dy="10"
-                        stdDeviation="10"
-                        flood-color="rgba(0,0,0,0.05)"
-                      ></feDropShadow>
+                      
                     </filter>
                     <linearGradient
                       id="banner-circle-fill-2"
@@ -133,12 +123,7 @@ export default {
                 <svg>
                   <defs>
                     <filter id="banner-rect-shadow-1">
-                      <feDropShadow
-                        dx="10"
-                        dy="10"
-                        stdDeviation="10"
-                        flood-color="rgba(0,0,0,0.05)"
-                      ></feDropShadow>
+                     
                     </filter>
                     <linearGradient
                       id="banner-rect-fill-1"
@@ -181,12 +166,7 @@ export default {
                 <svg width="860" height="860">
                   <defs>
                     <filter id="banner-diamond-shadow-1">
-                      <feDropShadow
-                        dx="10"
-                        dy="10"
-                        stdDeviation="10"
-                        flood-color="rgba(0,0,0,0.05)"
-                      ></feDropShadow>
+                      
                     </filter>
                     <linearGradient
                       id="banner-diamond-fill-1"

@@ -16,7 +16,7 @@ export default {
       <div class="header-container">
         <h2 onClick={this.jumpHome}>
           <a-avatar shape="square" size={46} src={`${BaseUrl}logo.svg`} />
-          <span class="lib-name">TQT-Components</span>
+          <span class="lib-name">K-View-Next</span>
         </h2>
         <NavMenu />
       </div>

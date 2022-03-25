@@ -1,4 +1,7 @@
 <script>
+import { ref, toRefs, computed } from 'vue'
+import { useRoute } from 'vue-router'
+
 export default {
   name: 'MenuTree',
   props: {
@@ -21,32 +24,47 @@ export default {
       default: (node) => node.label,
     },
   },
-  data () {
-    return {
-      menuData: [],
-      flatData: {},
-    };
-  },
-  computed: {
-    menuProps () {
-      const { $attrs, router, sep } = this;
-      let { openKeys, selectedKeys, ...restAttrs } = $attrs;
+  setup(props, { attrs }){
+    const menuData = ref([])
+    const flatData = ref([])
+    const { router, sep } = toRefs(props);
+    const menuProps = computed(()=>{
+      let { openKeys, selectedKeys, ...restAttrs } = attrs;
       if (router) {
-        const { path } = this.$route;
+        const { path } = useRoute();
         const pathArr = path.split(sep);
         openKeys = pathArr.slice(0, pathArr.length - 1);
         selectedKeys = [path];
       }
       return {
+        attrs: {
           openKeys,
           selectedKeys,
           ...restAttrs,
+        },
         // on: {
         //   ...$listeners,
         // },
-      };
-    },
+      }; 
+    })
+    return {
+      ...toRefs(props),
+      menuProps,
+      menuData,
+      flatData
+    }
   },
+  // data () {
+  //   return {
+  //     menuData: [],
+  //     flatData: {},
+  //   };
+  // },
+  // computed: {
+  //   menuProps () {
+      
+  //   },
+  // },
   watch: {
     dataSource: 'setFlat',
   },
@@ -77,6 +95,7 @@ export default {
           return prev;
         }, []);
       const menuData = dpFn(dataSource);
+      console.log(menuData);
       this.menuData = menuData;
       return menuData;
     },
@@ -85,16 +104,17 @@ export default {
       const { label, icon, children, key } = data;
       return data.children
         ? (
-        <ASubMenu key={key} v-slots={{
-          title: <span>
+        <ASubMenu key={key}>
+          <span slot="title">
+            {icon ? <AIcon type={icon} /> : ''}
             {labelFilter(data) || label}
           </span>
-        }}>
           {children.map((sub) => this.renderSubMenu(sub))}
         </ASubMenu>
           )
         : (
         <AMenuItem key={key}>
+          {icon ? <AIcon type={icon} /> : ''}
           {labelFilter(data) || label}
         </AMenuItem>
           );
@@ -109,6 +129,4 @@ export default {
     );
   },
 };
-// {icon ? <AIcon type={icon} /> : ''}
 </script>
-

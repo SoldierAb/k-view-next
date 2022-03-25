@@ -34,7 +34,7 @@ export default {
 @nav-height: 64px;
 @footer-height: 100px;
 @menu-width: 360px;
-.docs-container{
+.docs-container, #app{
   height: 100%;
   width: 100%;
 }
