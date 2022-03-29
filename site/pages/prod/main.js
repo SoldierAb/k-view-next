@@ -1,6 +1,6 @@
 import '../../../scripts/version';
 import { createApp, nextTick } from 'vue';
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import { routes } from './router';
 import App from './views/App.vue';
 import core from "../../core";
@@ -16,7 +16,7 @@ function render () {
   // 运行在主应用中时，添加路由命名空间 /vue
   const routeBase = window.__POWERED_BY_QIANKUN__ ? `/${packageName}` : '/'
   router = createRouter({
-    history: createWebHistory(routeBase),
+    history: process.env.VUE_APP_MODE === 'UMD_PREVIEW' ? createWebHashHistory(routeBase): createWebHistory(routeBase),
     routes
   })
 

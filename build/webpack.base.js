@@ -9,7 +9,6 @@ const getBabelConf = require('./getBabelConf')
 
 const tsConf = require('../tsconfig.json')
 
-
 // 加载.env 环境变量
 const injectEnv = require('./injectEnv')
 const defineVariables = injectEnv()
@@ -17,12 +16,9 @@ const defineVariables = injectEnv()
 const [demo] = [...process.argv].reverse()
 const demoPath = demo.replace(/\.\\|\.\/|\\|\/|['."]/g, ' ').trim().replace(/\s/g, '/')
 
-console.log('[current demo path] ', demoPath, process.argv)
-
 defineVariables['process.env'].DemoPath = JSON.stringify(demoPath)
 
 const htmlInjectVals = injectEnv(true)
-
 
 const getDevBabelConf = () => {
   const bf = getBabelConf()
@@ -54,7 +50,7 @@ const config = {
   output: {
     filename: "[name]/index.[contenthash].js",
     path: path.resolve(__dirname, "../dist"),
-    publicPath: '/',
+    publicPath: process.env.PUBLIC_PATH || '/',
     libraryTarget: 'umd',
   },
   devServer: {

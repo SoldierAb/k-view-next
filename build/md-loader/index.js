@@ -65,7 +65,7 @@ module.exports = function (source) {
     pageScript = content.slice(0, startIndex)
   }
 
-  console.log('comp script: ', pageScript)
+  // console.log('comp script: ', pageScript)
 
   output.push(content.slice(startIndex))
   return `

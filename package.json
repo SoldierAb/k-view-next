@@ -9,9 +9,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "gulp compile && node build/server.dev.js",
-    "docs": "gulp compile &&  node build/server.prod.js docs",
-    "docs:build": "node build/server.prod.build.js docs",
+    "dev": "gulp compile && node build/server.dev.js --mode=development",
+    "docs": "gulp compile &&  node build/server.prod.js --mode=development docs",
+    "docs:build": "gulp compile && node build/server.prod.build.js --mode=production docs",
     "compile": "gulp compile",
     "commit": "git add . && git-cz"
   },
@@ -40,6 +40,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "dotenv": "^16.0.0",
+    "dotenv-expand": "^8.0.3",
     "git-cz": "^4.8.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",

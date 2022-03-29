@@ -1,7 +1,33 @@
+const path = require('path')
+const dotenv = require('dotenv')
+const { expand: dotenvExpand } = require('dotenv-expand')
+
 const prefixRE = /^VUE_APP_/
 
+const load = envPath => {
+  try {
+    const env = dotenv.config({ path: envPath, debug: process.env.DEBUG })
+    dotenvExpand(env)
+    console.log(envPath, env)
+  } catch (err) {
+    if (err.toString().indexOf('ENOENT') < 0) {
+      console.error(err)
+    }
+  }
+}
+
 const injectEnv = (raw = false) => {
-  require('dotenv').config({ path: '.env' })
+
+  
+  const basePath = path.resolve(process.cwd(), `.env`)
+  const [,mode] = [...process.argv].reverse()[1].match(/--mode=(\w+)/)
+  
+  load(basePath)
+  
+  if(mode){
+    const envPath = path.resolve(process.cwd(), `.env${mode ? `.${mode}` : ``}`)
+    load(envPath)
+  }
 
   const env = {}
 

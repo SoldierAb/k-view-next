@@ -1,0 +1,40 @@
+language: node_js
+node_js:
+  - 14
+branches:
+  only:
+    - main
+cache:
+  directories:
+    - node_modules
+before_install:
+  - export TZ='Asia/Xiamen'        
+install: 
+  - yarn
+after_success:
+  - echo 'build success' 
+jobs:
+  include:
+    - stage: "gh-page"
+      script: yarn docs:build
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        keep_history: true
+        github_token: $GITHUB_TOKEN
+        local_dir: ./dist/
+        target_branch: gh-pages
+        verbose: true
+        on:
+          branch: main
+    - stage: release
+      node_js: "14"
+      script: yarn compile
+      deploy:
+        provider: npm
+        email: "$EMAIL"
+        api_key: "$NPM_TOKEN"
+        skip_cleanup: true
+        on:
+          branch: main
+
