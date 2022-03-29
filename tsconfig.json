@@ -2,9 +2,15 @@
     "compilerOptions": {
         "baseUrl": "./",
         "paths": {
-            "k-view-next": ["components/index.ts"],
-            "k-view-next/lib/*": ["components/*"],
-            "k-view-next/es/*": ["components/*"]
+            "k-view-next": [
+                "components/index.ts"
+            ],
+            "k-view-next/lib/*": [
+                "components/*"
+            ],
+            "k-view-next/es/*": [
+                "components/*"
+            ]
         },
         "target": "es6",
         "strict": true,
@@ -19,10 +25,10 @@
     },
     "exclude": [
         "node_modules",
+        "build",
         "lib",
         "es",
         "dist",
-        "v2-doc",
         "scripts",
         "**/__tests__/**/*"
     ]
