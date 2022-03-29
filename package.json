@@ -8,6 +8,22 @@
   "author": "cgj",
   "license": "MIT",
   "private": false,
+  "keywords": [
+    "vue",
+    "eleme",
+    "components",
+    "ant",
+    "design",
+    "antd",
+    "vue",
+    "typescript",
+    "ts",
+    "component",
+    "components",
+    "ui",
+    "framework",
+    "frontend"
+  ],
   "scripts": {
     "dev": "gulp compile && node build/server.dev.js --mode=development",
     "docs": "gulp compile &&  node build/server.prod.js --mode=development docs",
@@ -78,5 +94,13 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3",
     "webpack-merge": "^5.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoldierAb/k-view-next.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SoldierAb/k-view-next/issues"
+  },
+  "homepage": "https://github.com/SoldierAb/k-view-next#readme"
 }
