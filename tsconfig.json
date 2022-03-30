@@ -23,6 +23,7 @@
         "allowJs": true,
         "importsNotUsedAsValues": "preserve"
     },
+    "include": ["components/**/*.ts", "components/**/*.tsx"],
     "exclude": [
         "node_modules",
         "build",

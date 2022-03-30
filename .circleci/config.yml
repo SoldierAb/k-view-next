@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:14
     filters:
       branches:
         only: master
@@ -11,18 +11,19 @@ jobs:
           fingerprints:
             - "ae:9d:1b:7b:6a:98:6b:1e:46:77:49:c3:4f:0f:ff:5f"
       - checkout
+      # Download and cache dependencies
       - restore_cache:
-          keys:
-          - dependencies-
-          # fallback to using the latest cache if no exact match is found
-          - dependencies-
+         keys:
+         - v1-dependencies-{{ checksum "package.json" }}
+         # fallback to using the latest cache if no exact match is found
+         - v1-dependencies-
       - run:
           name: Install
-          command: yarn
+          command: yarn install
       - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-
+         paths:
+           - node_modules
+         key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Prepare shell commands
           command: cp .circleci/deploy.sh ../ && chmod +x ../deploy.sh
