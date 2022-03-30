@@ -6,6 +6,8 @@ yarn docs:build
 cd dist
 
 git init
+git config user.email "ab140140@163.com"
+git config user.name "SoldierAb"
 git add -A
 git commit -m 'docs: site deploy'
 
