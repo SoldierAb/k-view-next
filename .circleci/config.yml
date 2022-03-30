@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  install:
+  deploy:
     docker:
       - image: circleci/node:14
     steps:
@@ -21,13 +21,6 @@ jobs:
          paths:
            - node_modules
          key: v1-dependencies-{{ checksum "package.json" }}
-  deploy:
-    docker:
-      - image: circleci/node:14
-    filters:
-      branches:
-        only: main
-    steps:
       - run:
           name: Prepare shell commands
           command: cp .circleci/deploy.sh ./ && chmod +x ./deploy.sh && ls -a
@@ -37,10 +30,9 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  version: 2
   build_and_deploy:
     jobs:
-      - install
       - deploy:
-         requires:
-          - install
+         filters:
+          branches:
+           only: main
