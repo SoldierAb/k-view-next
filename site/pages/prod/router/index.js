@@ -46,6 +46,11 @@ export const navMenuDataSource = {
     icon: 'github',
     link: '',
   },
+  Typescript: {
+    label: 'Typescript',
+    icon: 'Typescript',
+    link: `${process.env.BASE_URL}ppt/typescript.html`,
+  }
 };
 
 

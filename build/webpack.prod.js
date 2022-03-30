@@ -23,7 +23,7 @@ module.exports = merge(baseConf, {
           context: 'site/public/',
           to: './',
           filter: async (resourcePath) => {
-            if (resourcePath.includes('html')) {
+            if (resourcePath.includes('index.html')) {
               return false
             }
             return true

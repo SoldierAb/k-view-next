@@ -28,7 +28,7 @@ export default {
       this.navProps.openKeys = openKeys;
     },
     onSelect ({ selectedKeys }) {
-      if (selectedKeys[0] === 'Github' || selectedKeys[0] === 'CHANGELOG') {
+      if (['Github', 'CHANGELOG', 'Typescript'].includes(selectedKeys[0])) {
         window.open(navMenuDataSource[selectedKeys[0]].link);
         return;
       }
