@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "rootDir":"./",
         "baseUrl": "./",
         "paths": {
             "k-view-next": [
@@ -15,6 +16,7 @@
         "target": "es6",
         "strict": true,
         "jsx": "preserve",
+        "module": "esnext",
         "moduleResolution": "node",
         "noUnusedParameters": true,
         "noUnusedLocals": true,

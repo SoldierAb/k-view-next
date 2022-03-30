@@ -22,7 +22,7 @@ jobs:
           command: yarn install
       - run:
           name: Bundle
-          command:  yarn docs:build   
+          command: yarn docs:build   
       - save_cache:
          paths:
            - node_modules
