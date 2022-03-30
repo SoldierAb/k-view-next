@@ -1,11 +1,8 @@
 version: 2
 jobs:
-  build:
+  install:
     docker:
       - image: circleci/node:14
-    filters:
-      branches:
-        only: main
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -24,9 +21,25 @@ jobs:
          paths:
            - node_modules
          key: v1-dependencies-{{ checksum "package.json" }}
+  deploy:
+    docker:
+      - image: circleci/node:14
+    filters:
+      branches:
+        only: main
+    steps:
       - run:
           name: Prepare shell commands
           command: cp .circleci/deploy.sh ./ && chmod +x ./deploy.sh && ls -a
       - run:
           name: Run deploy scripts
           command: ./deploy.sh
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_deploy:
+    jobs:
+      - install
+      - deploy:
+         requires:
+          - install
