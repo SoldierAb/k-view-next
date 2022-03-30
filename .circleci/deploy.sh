@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-# 构建
-yarn docs:build
 # 进入生成的构建文件夹
 cd dist
 

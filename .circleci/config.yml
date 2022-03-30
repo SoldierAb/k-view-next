@@ -20,6 +20,9 @@ jobs:
       - run:
           name: Install
           command: yarn install
+      - run:
+          name: Bundle
+          command:  yarn docs:build   
       - save_cache:
          paths:
            - node_modules
