@@ -38,4 +38,3 @@ Component compilation
 yarn compile
 
 ```
-
