@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KButton renders correctly 1`] = `
+<button class="k-btn-container k-btn-default">Follow
+  <!---->
+  <!---->
+</button>
+`;
