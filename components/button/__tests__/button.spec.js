@@ -5,9 +5,9 @@ describe('KButton', () => {
     it('renders correctly', () => {
         const wrapper = mount({
             render() {
-                return <Button>Follow</Button>;
+                return <Button>Follow</Button>
             },
-        });
-        expect(wrapper.html()).toMatchSnapshot();
-    });
+        })
+        expect(wrapper.html()).toMatchSnapshot()
+    })
 })

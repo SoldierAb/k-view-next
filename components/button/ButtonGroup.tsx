@@ -10,8 +10,8 @@ export default defineComponent({
         })
         const btnGroupProps = {
             ...attrs,
-            class: classes.value
+            class: classes.value,
         }
         return ()=> <div {...btnGroupProps}>{slots.default?.()}</div>
-    }
+    },
 })

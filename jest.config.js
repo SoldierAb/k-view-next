@@ -9,10 +9,10 @@ module.exports = {
     transform: {
         '^.+\\.(vue|md)$': '<rootDir>/node_modules/@vue/vue3-jest',
         '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
-        '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest'
+        '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest',
     },
     transformIgnorePatterns: [
-        'node_modules'
+        'node_modules',
     ],
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/$1',
@@ -20,21 +20,21 @@ module.exports = {
         'k-view-next/es': '<rootDir>/components',
     },
     testMatch: [
-        '**/*/__tests__/**/*.spec.js'
+        '**/*/__tests__/**/*.spec.js',
     ],
     snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
     setupFiles: [
-        '<rootDir>/tests/setup/jest.init.js'
+        '<rootDir>/tests/setup/jest.init.js',
     ],
     coverageDirectory: '<rootDir>/coverage',
     collectCoverageFrom: [
         'components/**/*.ts',
-        'components/**/*.tsx'
+        'components/**/*.tsx',
     ],
     testEnvironment: 'jsdom',
     globals: {
         'ts-jest': {
-            babelConfig: true
+            babelConfig: true,
         },
-    }
-};
+    },
+}

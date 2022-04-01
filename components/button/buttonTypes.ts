@@ -1,7 +1,7 @@
-import { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 
 const buttonProps = () => ({
-    type: String
+    type: String,
 })
 
 export type ButtonProps =  Partial<ExtractPropTypes<ReturnType<typeof buttonProps>>>;

@@ -1,3 +1,3 @@
-export const rootProviderKey = "rootProviderData";
+export const rootProviderKey = "rootProviderData"
 
-export const rootPrefixCls = "k";
+export const rootPrefixCls = "k"

@@ -1,6 +1,6 @@
 import type { App, Plugin } from 'vue'
 import Button from './Button'
-import ButtonGroup from './ButtonGroup';
+import ButtonGroup from './ButtonGroup'
 
 Button.install = function (app: App) {
     app.component(Button.name, Button)

@@ -17,6 +17,6 @@ export default (
 	})
 	// TODO: 其他全局属性获取
   return {
-    prefixCls
-  };
-};
+    prefixCls,
+  }
+}
