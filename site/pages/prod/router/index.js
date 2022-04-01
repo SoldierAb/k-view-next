@@ -39,12 +39,12 @@ export const navMenuDataSource = {
   },
   CHANGELOG: {
     label: '更新日志',
-    link: '',
+    link: 'https://github.com/SoldierAb/k-view-next/releases',
   },
   Github: {
     label: 'Github',
     icon: 'github',
-    link: '',
+    link: 'https://github.com/SoldierAb/k-view-next',
   },
   Typescript: {
     label: 'Typescript',
