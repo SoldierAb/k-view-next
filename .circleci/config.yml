@@ -29,11 +29,11 @@ jobs:
   site:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - add_ssh_keys:
           fingerprints:
             - "ae:9d:1b:7b:6a:98:6b:1e:46:77:49:c3:4f:0f:ff:5f"
-      - attach_workspace:
-          at: ~/repo
       - run:
           name: Prepare shell commands
           command: cp .circleci/github.sh ./ && chmod +x ./github.sh && ls -a
