@@ -78,12 +78,15 @@ workflows:
       - site:
           requires:
             - install
-          <<: *tagged
+          filters:
+            <<: *tagged
       - test:
           requires:
             - install
-          <<: *tagged
+          filters:
+            <<: *tagged
       - deploy:
           requires:
             - test
-          <<: *tagged
+          filters:
+            <<: *tagged
