@@ -9,9 +9,6 @@ jobs:
   install:
     <<: *defaults
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "ae:9d:1b:7b:6a:98:6b:1e:46:77:49:c3:4f:0f:ff:5f"
       - checkout
       # Download and cache dependencies
       - restore_cache:
@@ -32,6 +29,9 @@ jobs:
   site:
     <<: *defaults
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ae:9d:1b:7b:6a:98:6b:1e:46:77:49:c3:4f:0f:ff:5f"
       - attach_workspace:
           at: ~/repo
       - run:
