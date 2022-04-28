@@ -1,8 +1,9 @@
 version: 2
 
 defaults: &defaults
+  working_directory: ~/repo
   docker:
-    - image: circleci/node:14
+      - image: circleci/node:14
 
 jobs:
   install:
@@ -25,9 +26,14 @@ jobs:
          paths:
            - node_modules
          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
   site:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Prepare shell commands
           command: cp .circleci/github.sh ./ && chmod +x ./github.sh && ls -a
@@ -37,12 +43,16 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Run tests
           command: yarn test
   deploy:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Authenticate in registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
