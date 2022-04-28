@@ -1,3 +1,14 @@
+## [1.0.2](https://github.com/SoldierAb/k-view-next/compare/v1.0.1-alpha.5...v1.0.2) (2022-04-28)
+
+
+### Bug Fixes
+
+* 🐛 add fingerprints into site job ([9d4f062](https://github.com/SoldierAb/k-view-next/commit/9d4f062f8e362328a73dc53fd4c9c5349f16af8f))
+* 🐛 add ignore branchs ([dc3e7ee](https://github.com/SoldierAb/k-view-next/commit/dc3e7ee36881cbcd2a823a36c8cde18dd58af72a))
+* 🐛 known_hosts add ([e9cdc42](https://github.com/SoldierAb/k-view-next/commit/e9cdc42ee3b5ad27a0beac09555eb45b46d91cff))
+
+
+
 ## [1.0.1-alpha.5](https://github.com/SoldierAb/k-view-next/compare/v1.0.1-alpha.4...v1.0.1-alpha.5) (2022-04-28)
 
 
