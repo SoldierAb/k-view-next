@@ -35,22 +35,15 @@ jobs:
       - run:
           name: Run github shell
           command: ./github.sh
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
   test:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/repo
       - run:
           name: Run tests
           command: yarn test
   deploy:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/repo
       - run:
           name: Authenticate in registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
