@@ -31,10 +31,10 @@ jobs:
     steps:
       - run:
           name: Prepare shell commands
-          command: cp .circleci/github-page.sh ./ && chmod +x ./github-page.sh && ls -a
+          command: cp .circleci/github.sh ./ && chmod +x ./github.sh && ls -a
       - run:
-          name: Run github-page shell
-          command: ./github-page.sh
+          name: Run github shell
+          command: ./github.sh
       - persist_to_workspace:
           root: ~/repo
           paths: .
