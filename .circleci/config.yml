@@ -22,22 +22,27 @@ jobs:
       - run:
           name: Install
           command: yarn install
-      - run:
-          name: Run tests
-          command: yarn test
       - save_cache:
          paths:
            - node_modules
          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Prepare shell commands
-          command: cp .circleci/deploy.sh ./ && chmod +x ./deploy.sh && ls -a
+          command: cp .circleci/github-page.sh ./ && chmod +x ./github-page.sh && ls -a
       - run:
-          name: Run deploy scripts
-          command: ./deploy.sh
+          name: Run github-page shell
+          command: ./github-page.sh
       - persist_to_workspace:
           root: ~/repo
           paths: .
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Run tests
+          command: yarn test
   deploy:
     <<: *defaults
     steps:
@@ -60,11 +65,13 @@ workflows:
           filters:
             branches:
               only: main
+      - test:
+          filters:
+            branches:
+              only: main
       - deploy:
           requires:
-            - site
+            - test
           filters:
             tags:
               only: /^v.*/
-            branches:
-              ignore: /.*/  
