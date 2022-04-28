@@ -1,3 +1,4 @@
+import { merge } from 'lodash'
 import type { App, ComputedRef, Plugin, UnwrapRef } from "vue"
 import {
   defineComponent,
@@ -13,9 +14,12 @@ import type {
 import configProviderTypes from "./configProviderTypes"
 import type { Locale } from "./localeTypes"
 import { rootPrefixCls, rootProviderKey } from '../_constants/root'
+import locale from '../_locale'
+
 
 export const defaultRootConfig: UnwrapRef<ConfigProviderProps> = reactive({
   prefixCls: rootPrefixCls,
+  locale
 })
 
 
@@ -34,7 +38,7 @@ export function useLocaleReceive<T extends LocaleComponent>(
 ): ComputedRef<Locale[T]> {
   const config = inject<LocalReceiverCtx>(
     rootProviderKey,
-    {} as LocalReceiverCtx,
+    defaultRootConfig as LocalReceiverCtx,
   )
   return computed<Locale[T]>(() => {
     const { locale } = config
@@ -50,9 +54,10 @@ const ConfigProvider = defineComponent({
   setup(props, { slots }) {
     // 全局配置数据
     const configData = reactive({
-      ...defaultRootConfig,
-      ...props,
+      ...merge(defaultRootConfig, props)
+      // TODO: 默认属性合并
     })
+    console.log(123, props, configData)
     // 监听注入的全局数据
     Object.keys(props).forEach((key) => {
       watch(

@@ -36,16 +36,19 @@ export default defineComponent({
     return {
       btnProps,
       locale,
+      type
     }
   },
   render() {
-    const { locale, btnProps, $slots } = this
+    const { locale, btnProps, $slots, type } = this
     const child = $slots.default?.()
     return (
+      type === 'confirm'?
+      <button {...btnProps}>
+      {locale.OkText}
+    </button>:
       <button {...btnProps}>
         {child}
-        {locale.OkText}
-        {locale.CancelText}
       </button>
     )
   },
