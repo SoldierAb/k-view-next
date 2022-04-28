@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-console.log(process.env.DemoPath, process.env.DemoPath === "docs");
-
 /**
  * @description demo 开发预览
  * @param {*} folder
@@ -54,8 +52,6 @@ const requireDemo = () => {
 
 export const routes = requireDemo();
 
-console.log(process.env.DemoPath, process.env.DemoPath === "docs", routes);
-
 export default function createRoutes() {
   const base = `${process.env.DemoPath}`.split("/").pop();
   return createRouter({
@@ -63,39 +59,3 @@ export default function createRoutes() {
     routes,
   });
 }
-
-// const routes = [
-//   {
-//     path: '/',
-//     component: Home
-//   },
-//   {
-//     path: "/components",
-//     component: ButtonMd,
-//     children: [
-//       {
-//         path: 'button',
-//         components: {
-//           default: count,
-//           basic
-//         },
-//       }
-//     ]
-//   },
-// //   {
-// //     path: "/about",
-// //     name: "About",
-// //     // route level code-splitting
-// //     // this generates a separate chunk (about.[hash].js) for this route
-// //     // which is lazy-loaded when the route is visited.
-// //     component: () =>
-// //       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-// //   },
-// ];
-
-// const router = createRouter({
-//   history: createWebHistory('/'),
-//   routes,
-// });
-
-// export default router;

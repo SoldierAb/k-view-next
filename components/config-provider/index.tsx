@@ -57,7 +57,6 @@ const ConfigProvider = defineComponent({
       ...merge(defaultRootConfig, props)
       // TODO: 默认属性合并
     })
-    console.log(123, props, configData)
     // 监听注入的全局数据
     Object.keys(props).forEach((key) => {
       watch(
