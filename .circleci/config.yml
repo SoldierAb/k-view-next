@@ -71,10 +71,8 @@ workflows:
     jobs:
       - install:
           filters: &tagged
-            tags:
-              only: /^v.*/
             branches:
-              ignore: /.*/
+              only: main
       - site:
           requires:
             - install
@@ -89,4 +87,7 @@ workflows:
           requires:
             - test
           filters:
-            <<: *tagged
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/  
