@@ -6,7 +6,7 @@ defaults: &defaults
       - image: circleci/node:14
 
 jobs:
-  site:
+  install:
     <<: *defaults
     steps:
       - add_ssh_keys:
@@ -26,6 +26,9 @@ jobs:
          paths:
            - node_modules
          key: v1-dependencies-{{ checksum "package.json" }}
+  site:
+    <<: *defaults
+    steps:
       - run:
           name: Prepare shell commands
           command: cp .circleci/github-page.sh ./ && chmod +x ./github-page.sh && ls -a
@@ -62,10 +65,14 @@ workflows:
   build-deploy:
     jobs:
       - site:
+          requires:
+            - install
           filters:
             branches:
               only: main
       - test:
+          requires:
+            - install
           filters:
             branches:
               only: main
