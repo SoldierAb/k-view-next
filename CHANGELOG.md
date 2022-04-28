@@ -1,4 +1,8 @@
-## 1.0.1 (2022-04-28)
+## [1.0.1-alpha.1](https://github.com/SoldierAb/k-view-next/compare/v1.0.1...v1.0.1-alpha.1) (2022-04-28)
+
+
+
+## [1.0.1](https://github.com/SoldierAb/k-view-next/compare/517b7b91f44fc9cd4b133eeba670588f981939c8...v1.0.1) (2022-04-28)
 
 
 ### Bug Fixes
