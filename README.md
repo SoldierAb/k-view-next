@@ -38,3 +38,6 @@ Component compilation
 yarn compile
 
 ```
+
+
+### gen
