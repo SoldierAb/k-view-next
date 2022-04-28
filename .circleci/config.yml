@@ -70,23 +70,19 @@ workflows:
   build-deploy:
     jobs:
       - install
-      - site:
-          requires:
-            - install
-          filters:
-            branches:
-              only: main
-      - test:
-          requires:
-            - install
-          filters:
-            branches:
-              only: main
       - deploy:
           requires:
             - test
-          filters:
+          filters: &tagged
             tags:
               only: /^v.*/
             branches:
               ignore: /.*/
+      - site:
+          requires:
+            - install
+          <<: *tagged
+      - test:
+          requires:
+            - install
+          <<: *tagged
