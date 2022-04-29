@@ -1,3 +1,7 @@
+## [1.0.2-alpha.7](https://github.com/SoldierAb/k-view-next/compare/v1.0.2-alpha.6...v1.0.2-alpha.7) (2022-04-29)
+
+
+
 ## [1.0.2-alpha.6](https://github.com/SoldierAb/k-view-next/compare/v1.0.2-alpha.5...v1.0.2-alpha.6) (2022-04-29)
 
 
