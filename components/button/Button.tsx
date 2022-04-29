@@ -2,14 +2,14 @@ import { computed, defineComponent, toRefs } from "vue"
 import buttonTypes from "./buttonTypes"
 import { useLocaleReceive } from "../config-provider"
 import useConfigInject from "../_hooks/useConfigInject"
-
+import { componentNamePrefix } from "../_constants/root"
 export interface ButtonLocale {
   OkText: string;
   CancelText: string;
 }
 
 export default defineComponent({
-  name: "KButton",
+  name: componentNamePrefix + "Button",
   props: buttonTypes(),
   emits: ["click"],
   setup(props, { attrs, emit }) {

@@ -13,7 +13,7 @@ import type {
 } from "./configProviderTypes"
 import configProviderTypes from "./configProviderTypes"
 import type { Locale } from "./localeTypes"
-import { rootPrefixCls, rootProviderKey } from '../_constants/root'
+import { rootPrefixCls, rootProviderKey, componentNamePrefix } from '../_constants/root'
 import locale from '../_locale'
 
 
@@ -48,7 +48,7 @@ export function useLocaleReceive<T extends LocaleComponent>(
 
 
 const ConfigProvider = defineComponent({
-  name: "KConfigProvider",
+  name: componentNamePrefix + "ConfigProvider",
   inheritAttrs: false,
   props: configProviderTypes,
   setup(props, { slots }) {
