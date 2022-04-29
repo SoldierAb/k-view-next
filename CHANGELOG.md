@@ -1,3 +1,12 @@
+## [1.0.2-alpha.6](https://github.com/SoldierAb/k-view-next/compare/v1.0.2-alpha.5...v1.0.2-alpha.6) (2022-04-29)
+
+
+### Features
+
+* 🎸 fingerprint ([3a0e0b0](https://github.com/SoldierAb/k-view-next/commit/3a0e0b096d9539e827057bbf8005869086321569))
+
+
+
 ## [1.0.2-alpha.5](https://github.com/SoldierAb/k-view-next/compare/v1.0.2-alpha.4...v1.0.2-alpha.5) (2022-04-28)
 
 
