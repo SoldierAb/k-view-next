@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const { IgnorePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const getBabelConf = require('./getBabelConf')
 
@@ -18,10 +17,12 @@ const demoPath = demo.replace(/\.\\|\.\/|\\|\/|['."]/g, ' ').trim().replace(/\s/
 
 defineVariables['process.env'].DemoPath = JSON.stringify(demoPath)
 
-const htmlInjectVals = injectEnv(true)
 
 const getDevBabelConf = () => {
-  const bf = getBabelConf()
+  const bf = getBabelConf(false) // false --> use esModules
+
+  bf.sourceType = "unambiguous";
+
   // 设置缓存
   bf.cacheDirectory = true;
   // 按需加载
@@ -38,28 +39,12 @@ const getDevBabelConf = () => {
 
 const babelConf = getDevBabelConf()
 
-const testLoader = (source) => `<template>${source}</template>`
-
 const config = {
   mode: "development",
   devtool: 'cheap-module-source-map',
   infrastructureLogging: {
     level: 'log',
     // debug: [/md-loader/, (name) => (console.log(name, '\n\n'), `${name}`.includes('md'))],
-  },
-  output: {
-    filename: "[name]/index.[contenthash].js",
-    path: path.resolve(__dirname, "../dist"),
-    publicPath: process.env.PUBLIC_PATH || '/',
-    libraryTarget: 'umd',
-  },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, '../site/public'), // 指定静态资源解析文件夹
-    },
-    historyApiFallback: true, // web history mode fallback 
-    hot: true,
-    open: true,
   },
   watchOptions: {
     ignored: /node_modules/
@@ -69,12 +54,6 @@ const config = {
 
     new CleanWebpackPlugin({
       verbose: true,
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "../site/public/index.html"),
-      templateParameters: {
-        ...htmlInjectVals
-      }
     }),
     new webpack.ProvidePlugin({
       process: 'process/browser'
@@ -159,8 +138,8 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".md"],
     alias: {
-      "k-view-next/lib": path.join(__dirname, "../lib"),
-      "k-view-next/es": path.join(__dirname, "../es"),
+      // "k-view-next/lib": path.join(__dirname, "../lib"),
+      // "k-view-next/es": path.join(__dirname, "../es"),
       "k-view-next": path.join(__dirname, "../components"),
       process: "process/browser",
     },

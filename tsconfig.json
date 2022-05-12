@@ -11,7 +11,8 @@
             ],
             "k-view-next/es/*": [
                 "components/*"
-            ]
+            ],
+            "vue": ["@vue/runtime-dom"]
         },
         "target": "es6",
         "strict": true,
@@ -33,5 +34,10 @@
         "dist",
         "scripts",
         "**/__tests__/**/*"
+    ],
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.vue"
     ]
 }

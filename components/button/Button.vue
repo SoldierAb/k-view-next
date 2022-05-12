@@ -1,12 +1,10 @@
+<script lang="ts">
 import { computed, defineComponent, toRefs } from "vue"
 import buttonTypes from "./buttonTypes"
 import { useLocaleReceive } from "../config-provider"
 import useConfigInject from "../_hooks/useConfigInject"
 import { componentNamePrefix } from "../_constants/root"
-export interface ButtonLocale {
-  OkText: string;
-  CancelText: string;
-}
+
 
 export default defineComponent({
   name: componentNamePrefix + "Button",
@@ -36,20 +34,29 @@ export default defineComponent({
     return {
       btnProps,
       locale,
-      type
+      type,
     }
   },
-  render() {
-    const { locale, btnProps, $slots, type } = this
-    const child = $slots.default?.()
-    return (
-      type === 'confirm'?
-      <button {...btnProps}>
-      {locale.OkText}
-    </button>:
-      <button {...btnProps}>
-        {child}
-      </button>
-    )
-  },
 })
+</script>
+
+
+<template>
+  <button
+    v-if="type === 'confirm'"
+    v-bind="btnProps"
+  >
+    {{ locale.OkText }}
+  </button>
+  <button
+    v-else
+    v-bind="btnProps"
+  >
+    <slot />
+  </button>
+</template>
+
+
+<style lang="less">
+  @import url(./style/index.less);
+</style>

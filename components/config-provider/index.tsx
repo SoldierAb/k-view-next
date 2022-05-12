@@ -1,4 +1,4 @@
-import { merge } from 'lodash'
+// import { merge } from 'lodash'
 import type { App, ComputedRef, Plugin, UnwrapRef } from "vue"
 import {
   defineComponent,
@@ -54,7 +54,8 @@ const ConfigProvider = defineComponent({
   setup(props, { slots }) {
     // 全局配置数据
     const configData = reactive({
-      ...merge(defaultRootConfig, props)
+      ...props
+      // ...merge(defaultRootConfig, props)
       // TODO: 默认属性合并
     })
     // 监听注入的全局数据

@@ -1,4 +1,4 @@
-import type { ButtonLocale } from '../button/Button'
+import type { ButtonLocale } from '../button/buttonTypes'
 export interface  Locale {
     lang: string;
     Button: ButtonLocale;

@@ -1,6 +1,7 @@
 import type { App } from 'vue'
 
 import * as components from './components'
+
 export * from './components'
 
 export const install = function (app: App) {
@@ -12,7 +13,6 @@ export const install = function (app: App) {
   })
   return app
 }
-
 
 export default {
   install,

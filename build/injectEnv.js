@@ -17,16 +17,18 @@ const load = envPath => {
 }
 
 const injectEnv = (raw = false) => {
-
   
   const basePath = path.resolve(process.cwd(), `.env`)
-  const [,mode] = [...process.argv].reverse()[1].match(/--mode=(\w+)/)
+  const matchedRes = [...process.argv].reverse()[1].match(/--mode=(\w+)/)
   
   load(basePath)
-  
-  if(mode){
-    const envPath = path.resolve(process.cwd(), `.env${mode ? `.${mode}` : ``}`)
-    load(envPath)
+
+  if(matchedRes) {
+    const [,mode] = matchedRes
+    if(mode){
+      const envPath = path.resolve(process.cwd(), `.env.${mode}`)
+      load(envPath)
+    }
   }
 
   const env = {}

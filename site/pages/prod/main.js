@@ -17,6 +17,7 @@ function render () {
   const routeBase = window.__POWERED_BY_QIANKUN__ ? `/${packageName}` : '/'
   router = createRouter({
     history: process.env.VUE_APP_MODE === 'UMD_PREVIEW' ? createWebHashHistory(routeBase): createWebHistory(routeBase),
+    // history:  createWebHashHistory(routeBase),
     routes
   })
 

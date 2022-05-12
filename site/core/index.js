@@ -1,5 +1,4 @@
 import KView from 'k-view-next'
-import 'k-view-next/lib/style'
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';

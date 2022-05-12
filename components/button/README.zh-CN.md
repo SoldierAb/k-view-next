@@ -63,6 +63,18 @@ title:
 :::
 
 
+### 类型检查
+
+> 请看编辑器或控制台， 编辑器需要安装插件 ![Vue Language Features (Volar)](assets/vue3-snippets.png)
+
+
+:::external
+
+```html
+<code src="./demos/type-check.vue" />
+
+```
+:::
 
 
 

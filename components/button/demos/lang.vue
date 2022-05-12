@@ -14,8 +14,8 @@
 
 <script>
 import { ref, computed } from "vue"
-import zhCN from "k-view-next/lib/_locale/zh-CN"
-import enUS from "k-view-next/lib/_locale/en-US"
+import zhCN from "k-view-next/_locale/zh-CN.ts"
+import enUS from "k-view-next/_locale/en-US.ts"
 
 export default {
   setup() {

@@ -3,7 +3,7 @@ const anchorPlugin = require("markdown-it-anchor");
 const container = require("./container");
 const tocRight = require("markdown-it-toc-done-right");
 const attrsPlugin = require("markdown-it-attrs");
-// const iterator = require('markdown-it-for-inline')
+const iterator = require('markdown-it-for-inline')
 const fs = require("fs");
 const path = require("path");
 const config = new MdChainConfig();
@@ -61,7 +61,18 @@ config.options
   .end()
   .plugin("containers")
   .use(container)
-  .end();
+  .end()
+  .plugin('iterators')
+  .use(iterator, [
+    'replace_img_src',
+    'image',
+    function (tokens, idx) {
+      const srcValue = tokens[idx].attrGet('src')
+      if (srcValue) {
+        tokens[idx].attrSet('src', process.env.PUBLIC_PATH + srcValue)
+      }
+    }
+  ])
 // .plugin('iterators')
 // .use(iterator, [
 //   'url_new_win',

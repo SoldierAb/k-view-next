@@ -9,10 +9,10 @@ const server = new WebpackDevServer(devServerOptions, compiler)
 const concurrently = require('concurrently')
 
 server.startCallback(() => {
-  console.log('Successfully started server')
-  concurrently([
-    {
-      command: 'gulp compile-watch', name: 'watch', cwd: path.resolve(__dirname, '../')
-    }
-  ])
+  console.log('Successfully started server', webpackConfig, process.env.PUBLIC_PATH)
+  // concurrently([
+  //   {
+  //     command: 'gulp compile-watch', name: 'watch', cwd: path.resolve(__dirname, '../')
+  //   }
+  // ])
 })
