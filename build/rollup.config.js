@@ -39,7 +39,6 @@ const getConf = ({
         ],
         external: ['vue'],
         output: {
-            name: "index",
             format: "es",
             file: fileOutput,
             globals: {

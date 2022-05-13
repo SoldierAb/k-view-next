@@ -41,3 +41,35 @@ yarn compile
 
 
 ### gen
+
+`TODO`
+
+Script to quickly create component code
+
+```bash
+
+
+```
+
+
+
+### Import on Demand
+
+> `k-view-next` supports tree shaking of ES modules, so using import { Button } from 'k-view-next'; would drop js code you didn't use. If you see logs like in the screenshot below, you might still be using webpack@1.x or have a wrong webpack config which can't support tree shaking.
+
+- we can import individual components on demand:
+
+```js
+
+import Button from 'k-view-next/lib/button'
+import 'k-view-next/lib/button/style'
+
+```
+
+- We strongly recommend using [babel-plugin-import](https://github.com/umijs/babel-plugin-import), which can convert the following code to the 'k-view-next/lib/xxx' way:
+
+```js
+
+import { Button } from 'k-view-next'
+
+```

@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "rootDir":"./",
         "baseUrl": "./",
         "paths": {
             "k-view-next": [
@@ -32,7 +31,7 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "lib": ["esnext", "dom"],
-        "outDir":"./lib"
+        "outDir":"./lib/"
     },
     "exclude": [
         "node_modules",
