@@ -8,7 +8,6 @@ const load = envPath => {
   try {
     const env = dotenv.config({ path: envPath, debug: process.env.DEBUG })
     dotenvExpand(env)
-    console.log(envPath, env)
   } catch (err) {
     if (err.toString().indexOf('ENOENT') < 0) {
       console.error(err)

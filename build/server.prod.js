@@ -8,5 +8,5 @@ const devServerOptions = { ...webpackConfig.devServer, open: true }
 const server = new WebpackDevServer(devServerOptions, compiler)
 
 server.startCallback(() => {
-  console.log('Successfully started server', webpackConfig, process.env.PUBLIC_PATH)
+  console.log('🚀 Successfully started server')
 })
