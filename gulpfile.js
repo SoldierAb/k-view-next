@@ -3,11 +3,12 @@ const rollup = require('rollup');
 const rollupConfig = require('./build/rollup.config');
 
 gulp.task('compile',async function (done) {
-  const bundleTaskFunc = async ({input, plugins, output}) => {
-    const inputOption = {
-      input,
-      plugins
-    }
+  const bundleTaskFunc = async ({ output, ...inputOption}) => {
+    // const inputOption = {
+    //   input,
+    //   plugins,
+    //   external
+    // }
     const bundleRes = await rollup.rollup(inputOption)
     const res = await bundleRes.write(output)
     return res

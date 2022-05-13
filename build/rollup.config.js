@@ -4,8 +4,7 @@ const typescript = require("rollup-plugin-typescript2")
 const vue = require("rollup-plugin-vue")
 const less = require("rollup-plugin-less")
 // const { terser } = require('rollup-plugin-terser');
-// const nodeResolve = require("@rollup/plugin-node-resolve").nodeResolve
-
+const nodeResolve = require("@rollup/plugin-node-resolve").nodeResolve
 
 const inputDir = path.resolve(__dirname, '../components')
 const outputDir = path.resolve(__dirname, '../lib')
@@ -19,8 +18,9 @@ const getConf = ({
     const conf = {
         input,
         plugins: [
-            // FIXME: 不加nodeResolve解析，避免vue代码构建进lib包
-            // nodeResolve(),
+            nodeResolve({
+                skip: ['vue']
+            }),
             vue(),
             typescript({
                 tsconfigOverride: {
