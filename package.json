@@ -3,7 +3,6 @@
   "version": "1.0.2-alpha.7",
   "description": "vue3 ui library",
   "main": "lib/index.js",
-  "module": "es/index.js",
   "typings": "lib/index.d.ts",
   "author": "cgj",
   "license": "MIT",
@@ -25,7 +24,7 @@
     "frontend"
   ],
   "scripts": {
-    "bundle": "gulp bundle",
+    "bundle": "rm -rf lib && gulp bundle",
     "dev": "node build/server.dev.js --mode=development",
     "docs": "node build/server.prod.js --mode=development docs",
     "docs:build": "gulp compile && node build/server.prod.build.js --mode=production docs",

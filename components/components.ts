@@ -1,4 +1,4 @@
-import ConfigProvider from './config-provider'
+import ConfigProvider from './config-provider/index'
 import Button from './button'
 
 

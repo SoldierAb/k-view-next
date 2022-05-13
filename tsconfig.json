@@ -24,7 +24,15 @@
         "noImplicitAny": false,
         "skipLibCheck": true,
         "allowJs": true,
-        "importsNotUsedAsValues": "preserve"
+        "importsNotUsedAsValues": "preserve",
+        "declaration": true,
+        "declarationDir":"./lib",
+        "removeComments": true,
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "lib": ["esnext", "dom"],
+        "outDir":"./lib"
     },
     "exclude": [
         "node_modules",
@@ -36,8 +44,6 @@
         "**/__tests__/**/*"
     ],
     "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.vue"
+        "components/*"
     ]
 }

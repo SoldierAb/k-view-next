@@ -26,7 +26,12 @@ export default {
     // 多语言注入, 此处引用组件库内置多语言配置
     const localeData = {
       "zh-CN": zhCN,
-      "en-US": enUS,
+      "en-US": {
+        Button: {
+          OkText: 'Confirm112',
+          CancelText: 'Cancel',
+        },
+      },
     }
 
     const locale = computed(() => {

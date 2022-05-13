@@ -19,7 +19,7 @@ defineVariables['process.env'].DemoPath = JSON.stringify(demoPath)
 
 
 const getDevBabelConf = () => {
-  const bf = getBabelConf(false) // false --> use esModules
+  const bf = getBabelConf()
 
   bf.sourceType = "unambiguous";
 
@@ -98,12 +98,14 @@ const config = {
           {
             loader: "ts-loader",
             options: {
+              appendTsSuffixTo: [/\.vue$/],
               compilerOptions: {
                 ...tsConf.compilerOptions,
                 //  FIXME: Vue3 template 编译缺陷, 需要设置为false, 参考 https://github.com/vuejs/core/issues/4668
                 noUnusedParameters: false,
               },
-              appendTsSuffixTo: [/\.vue$/],
+              // FIXME: 修复docs scripts热更新失败问题： https://github.com/babel/babel-loader/issues/912
+              transpileOnly:true
             },
           },
         ],
