@@ -24,14 +24,13 @@
     "frontend"
   ],
   "scripts": {
-    "bundle": "rm -rf lib && gulp bundle",
+    "compile": "rm -rf lib && gulp compile",
     "dev": "node build/server.dev.js --mode=development",
     "docs": "node build/server.prod.js --mode=development docs",
     "docs:build": "gulp compile && node build/server.prod.build.js --mode=production docs",
     "build": "cross-env NODE_ENV=production webpack  --config=build/webpack.lib.js",
     "lint": "eslint . --ext '.js,.jsx,.ts,.tsx' --fix",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "compile": "gulp compile",
     "commit": "git add . && git-cz"
   },
   "devDependencies": {

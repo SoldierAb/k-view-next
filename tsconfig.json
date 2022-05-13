@@ -43,6 +43,7 @@
         "**/__tests__/**/*"
     ],
     "include": [
-        "components/*"
+        "components/**/*.ts",
+        "components/**/*.tsx"
     ]
 }

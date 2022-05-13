@@ -68,6 +68,21 @@ import 'k-view-next/lib/button/style'
 
 - We strongly recommend using [babel-plugin-import](https://github.com/umijs/babel-plugin-import), which can convert the following code to the 'k-view-next/lib/xxx' way:
 
+
+```js
+// babel.config.js
+
+  [
+    'babel-plugin-import',
+    {
+      libraryName: 'k-view-next',
+      libraryDirectory: '', // default: lib
+      style: true,
+    },
+  ]
+
+```
+
 ```js
 
 import { Button } from 'k-view-next'

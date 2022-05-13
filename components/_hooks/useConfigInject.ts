@@ -12,12 +12,10 @@ export default (
   prefixCls: ComputedRef<string>;
 } => {
 	const rootConfig = inject<UnwrapRef<ConfigProviderProps>>(rootProviderKey, defaultRootConfig)
-  console.log('rootConfig' ,rootConfig)
 	const prefixCls = computed(()=> {
 		return rootConfig?.prefixCls || rootPrefixCls
 	})
 	// TODO: 其他全局属性获取
-  console.log('prefixCls' ,prefixCls)
   return {
     prefixCls,
   }

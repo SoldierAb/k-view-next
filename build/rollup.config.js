@@ -14,7 +14,6 @@ const outputDir = path.resolve(__dirname, '../lib')
 const getConf = ({
     input,
     fileOutput,
-    declaration,
     lessOutput,
 }, shouldTerser) => {
     const conf = {
@@ -72,7 +71,6 @@ const config = fs.readdirSync(inputDir)
     })
     .map(name => {
         return getConf({
-            declaration: false,
             input: `${inputDir}/${name}/index.ts`,
             fileOutput: `${outputDir}/${name}/index.js`,
             lessOutput: `${outputDir}/${name}/style.css`,
@@ -88,7 +86,6 @@ const langsCompilers = fs.readdirSync(langsFolder)
     })
     .map(name => {
         return getConf({
-            declaration: false,
             input: `${langsFolder}/${name}`,
             fileOutput: `${outputDir}/_locale/${name.replace(/\.ts/,'.js')}`,
         })
@@ -98,14 +95,12 @@ config.push(...langsCompilers)
     
 // 顶层配置注入组件
 config.push(getConf({
-    declaration: false,
     input: `${inputDir}/config-provider/index.tsx`,
     fileOutput: `${outputDir}/config-provider/index.js`,
 }))
 
 // 组件入口文件
 config.push(getConf({
-    declaration: true,
     input: `${inputDir}/index.ts`,
     lessOutput: `${outputDir}/style.css`,
     fileOutput: `${outputDir}/index.js`,
