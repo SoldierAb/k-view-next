@@ -18,7 +18,7 @@ import locale from '../_locale'
 
 export const defaultRootConfig: UnwrapRef<ConfigProviderProps> = reactive({
   prefixCls: rootPrefixCls,
-  locale
+  locale,
 })
 
 
@@ -55,7 +55,7 @@ const ConfigProvider = defineComponent({
     const configData = reactive({
       ...props,
       // TODO: 默认属性合并
-      ...Object.assign(defaultRootConfig, props)
+      ...Object.assign(defaultRootConfig, props),
     })
     // 监听注入的全局数据
     Object.keys(props).forEach((key) => {
@@ -66,8 +66,6 @@ const ConfigProvider = defineComponent({
         },
       )
     })
-
-    console.log('--configData-- ', configData)
 
     provide(rootProviderKey, configData)
 
