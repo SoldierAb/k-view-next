@@ -1,9 +1,11 @@
 const MdChainConfig = require("markdown-it-chain");
 const anchorPlugin = require("markdown-it-anchor");
 const container = require("./container");
-const tocRight = require("markdown-it-toc-done-right");
+// const tocRight = require("markdown-it-toc-done-right");
 const attrsPlugin = require("markdown-it-attrs");
 const iterator = require('markdown-it-for-inline')
+const antAnchorPlugin = require('./plugin/markdown-it-toc-ant-anchor')
+
 const fs = require("fs");
 const path = require("path");
 const config = new MdChainConfig();
@@ -44,18 +46,25 @@ config.options
   ])
   .end()
   .plugin("toc")
-  .use(tocRight, [
+  // .use(tocRight, [
+  //   {
+  //     level: [2, 3, 4, 5, 6],
+  //     listClass: "toc-nav-list",
+  //     itemClass: "toc-nav-item",
+  //     linkClass: "toc-nav-link",
+  //     format: function (x, htmlencode) {
+  //       // return `<span class="xxxx">${htmlencode(x)}</span>`
+  //       const anchorHref = encodeURIComponent(String(x).trim().toLowerCase().replace(/\s+/g, '-'))
+  //       console.log(x, htmlencode, anchorHref)
+  //       return `<a-anchor-link href="#${anchorHref}" title="${htmlencode(x)}"></a-anchor-link>`
+  //     }
+  //   },
+  // ])
+  // .end()
+  .use(antAnchorPlugin, [
     {
       level: [2, 3, 4, 5, 6],
-      listClass: "toc-nav-list",
-      itemClass: "toc-nav-item",
-      linkClass: "toc-nav-link",
-      // format: function (x, htmlencode) {
-      //   console.log(x, htmlencode)
-      //   // return `<span class="xxxx">${htmlencode(x)}</span>`
-      //   const anchorHref = encodeURIComponent(String(x).trim().toLowerCase().replace(/\s+/g, '-'))
-      //   return `<a-anchor-link href="#${anchorHref}" title="${htmlencode(x)}"></a-anchor-link>`
-      // }
+      containerStyle: 'max-width: 200px;'
     },
   ])
   .end()

@@ -15,6 +15,7 @@ module.exports = function (source) {
   // 文档demo解析
   let id = 1 // demo 的 id
   const content = md.render(source, { resourcePath: this.resourcePath })
+
   const startTag = '<!--demo:'
   const endTag = ':demo-->'
   const startTagLen = startTag.length
