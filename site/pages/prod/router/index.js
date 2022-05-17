@@ -132,7 +132,7 @@ export const routes = [
   {
     path:'/',
     redirect: '/Home',
-  },
+  }
 ];
   
 console.log(routes);

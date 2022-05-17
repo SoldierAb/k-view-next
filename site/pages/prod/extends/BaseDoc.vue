@@ -52,6 +52,8 @@ export default {
     const { menuProps, onOpenChange, onSelect } = this;
     return (
       <div class="preview-components-container">
+            <AAffix offsetTop={64}>
+
         <section class="section-menu">
           <MenuTree
             {...menuProps}
@@ -60,6 +62,7 @@ export default {
             style={{ height: "100%" }}
           />
         </section>
+        </AAffix>
         <section class="markdown-preview-box section-box">
           <RouterView />
         </section>
@@ -90,8 +93,7 @@ export default {
   .section-box {
     width: calc(~"100% - @{menu-width}");
     height: 100%;
-    overflow: auto;
-    padding: 40px 240px 100px 40px;
+    padding: 40px 260px 100px 40px;
     border: 1px solid @border-color-light;
   }
   .pre-code {

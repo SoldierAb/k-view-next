@@ -10,9 +10,11 @@ export default {
     return (
       <div class="docs-container">
         <div class="preview-container">
+            <AAffix offsetTop={0}>
           <div class="nav-box">
-            <Header />
+              <Header />
           </div>
+            </AAffix>
           <div class="preview-contents-box">
             <RouterView />
           </div>
@@ -59,7 +61,6 @@ export default {
     justify-content: center;
     width: 100%;
     height: calc(~"100% - @{nav-height}");
-    overflow: auto;
   }
   .preview-components-box {
     display: flex;
