@@ -1,6 +1,6 @@
 {
   "name": "k-view-next",
-  "version": "1.0.3",
+  "version": "1.0.3-alpha.1",
   "description": "vue3 ui library",
   "main": "lib/index.js",
   "module": "es/index.js",
