@@ -1,3 +1,17 @@
+## [1.0.3](https://github.com/SoldierAb/k-view-next/compare/v1.0.2-alpha.7...v1.0.3) (2022-05-18)
+
+
+### Features
+
+* 🎸 add componentNamePrefix ([08edb80](https://github.com/SoldierAb/k-view-next/commit/08edb802cbfc0b1d9c880900d36ffa686a427b76))
+
+
+### Performance Improvements
+
+* ⚡️ upgrade ([8504d2b](https://github.com/SoldierAb/k-view-next/commit/8504d2bd9197f2c152f594d5579bc625e4b2d09c))
+
+
+
 ## [1.0.2-alpha.7](https://github.com/SoldierAb/k-view-next/compare/v1.0.2-alpha.6...v1.0.2-alpha.7) (2022-04-29)
 
 
