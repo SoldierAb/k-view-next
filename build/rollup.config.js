@@ -25,7 +25,6 @@ const getConf = ({
             typescript({
                 tsconfigOverride: {
                     compilerOptions: {
-                        allowJs: false,
                         declaration: true,
                         declarationDir: outputDir,
                     },
@@ -63,7 +62,7 @@ const config = fs.readdirSync(inputDir)
             "_hooks",
             "index.ts",
             "components.ts",
-            "global.d.ts",
+            "shims-vue.d.ts",
             "style.ts",
             "theme",
             "config-provider"
