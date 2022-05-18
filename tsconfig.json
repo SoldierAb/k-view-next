@@ -41,7 +41,7 @@
         "dist",
         "scripts",
         "**/__tests__/**/*",
-        "**/demos/**/*",
+        "**/demos/**/*"
     ],
     "include": [
         "components/**/*.ts",

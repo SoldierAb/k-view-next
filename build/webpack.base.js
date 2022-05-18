@@ -140,8 +140,8 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".md"],
     alias: {
-      // "k-view-next/lib": path.join(__dirname, "../lib"),
-      // "k-view-next/es": path.join(__dirname, "../es"),
+      "k-view-next/lib": path.join(__dirname, "../lib"),
+      "k-view-next/es": path.join(__dirname, "../es"),
       "k-view-next": path.join(__dirname, "../components"),
       process: "process/browser",
     },

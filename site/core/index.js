@@ -1,6 +1,4 @@
-import KView from '../../lib'
-import '../../lib/style.css'
-// import KView from 'k-view-next'
+import KView from 'k-view-next'
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
