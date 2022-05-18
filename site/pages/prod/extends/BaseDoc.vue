@@ -52,16 +52,15 @@ export default {
     const { menuProps, onOpenChange, onSelect } = this;
     return (
       <div class="preview-components-container">
-            <AAffix offsetTop={64}>
-
-        <section class="section-menu">
-          <MenuTree
-            {...menuProps}
-            onOpenChange={onOpenChange}
-            onSelect={onSelect}
-            style={{ height: "100%" }}
-          />
-        </section>
+        <AAffix offsetTop={64}>
+          <section class="section-menu">
+            <MenuTree
+              {...menuProps}
+              onOpenChange={onOpenChange}
+              onSelect={onSelect}
+              style={{ height: "100%" }}
+            />
+          </section>
         </AAffix>
         <section class="markdown-preview-box section-box">
           <RouterView />
@@ -95,6 +94,9 @@ export default {
     height: 100%;
     padding: 40px 260px 100px 40px;
     border: 1px solid @border-color-light;
+  }
+  .external-demo-content {
+    padding-bottom: 100px;
   }
   .pre-code {
     font-family: "Lucida Console", Consolas, Monaco, "Andale Mono",
