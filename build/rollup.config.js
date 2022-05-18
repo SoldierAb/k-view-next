@@ -25,12 +25,10 @@ const getConf = ({
             typescript({
                 tsconfigOverride: {
                     compilerOptions: {
-                        declaration: true,
-                        declarationDir: outputDir,
+                        declaration: false, // 声明文件由 vue-tsc 生成 https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc#using
                     },
                     exclude: ["node_modules/**"],
                 },
-                useTsconfigDeclarationDir: true,
                 abortOnError: false,
                 clean: true,
             }),

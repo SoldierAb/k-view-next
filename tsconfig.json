@@ -40,7 +40,8 @@
         "es",
         "dist",
         "scripts",
-        "**/__tests__/**/*"
+        "**/__tests__/**/*",
+        "**/demos/**/*",
     ],
     "include": [
         "components/**/*.ts",
