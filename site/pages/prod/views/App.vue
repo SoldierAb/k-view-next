@@ -1,20 +1,17 @@
 <script>
-import Header from './Header.vue';
+import Header from "./Header.vue";
 
 export default {
-  data () {
-    return {
-    };
+  data() {
+    return {};
   },
-  render () {
+  render() {
     return (
       <div class="docs-container">
         <div class="preview-container">
-            <AAffix offsetTop={0}>
-          <div class="nav-box">
+            <div class="nav-box">
               <Header />
-          </div>
-            </AAffix>
+            </div>
           <div class="preview-contents-box">
             <RouterView />
           </div>
@@ -26,7 +23,7 @@ export default {
 </script>
 
 <style lang="less">
-@import url('../../../theme/common.less');
+@import url("../../../theme/common.less");
 
 @border-color-light: #f5f5f5;
 @font-family: microsoft YaHei, Simsun;
@@ -36,7 +33,8 @@ export default {
 @nav-height: 64px;
 @footer-height: 100px;
 @menu-width: 360px;
-.docs-container, #app{
+.docs-container,
+#app {
   height: 100%;
   width: 100%;
 }
@@ -56,7 +54,7 @@ export default {
     background: #fff;
     box-shadow: 0 8px 24px -2px rgb(0 0 0 / 5%);
   }
-  .preview-contents-box{
+  .preview-contents-box {
     display: flex;
     justify-content: center;
     width: 100%;

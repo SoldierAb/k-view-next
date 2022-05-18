@@ -1,23 +1,26 @@
 <script>
-import NavMenu from './NavMenu.vue';
+import { Affix } from "ant-design-vue";
+import NavMenu from "./NavMenu.vue";
 export default {
-  data () {
+  data() {
     return {};
   },
   methods: {
-    jumpHome () {
-      this.$router.push('/');
+    jumpHome() {
+      this.$router.push("/");
     },
   },
-  render () {
+  render() {
     // eslint-disable-next-line no-undef
     const BaseUrl = __webpack_public_path__;
     return (
       <div class="header-container">
-        <h2 onClick={this.jumpHome}>
-          <a-avatar shape="square" size={46} src={`${BaseUrl}logo.png`} />
-          <span class="lib-name">k-view-next</span>
-        </h2>
+        <Affix offsetTop={10}>
+          <h2 onClick={this.jumpHome}>
+            <a-avatar shape="square" size={46} src={`${BaseUrl}logo.png`} />
+            <span class="lib-name">k-view-next</span>
+          </h2>
+        </Affix>
         <NavMenu />
       </div>
     );
@@ -36,7 +39,7 @@ export default {
     color: #080e29;
     padding: 10px;
   }
-  h2{
+  h2 {
     margin: 0;
     padding: 0;
   }
