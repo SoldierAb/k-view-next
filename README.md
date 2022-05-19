@@ -99,6 +99,7 @@ Script to quickly create component code
 
 ```bash
 
+yarn gen
 
 ```
 

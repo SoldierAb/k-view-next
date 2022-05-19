@@ -90,7 +90,7 @@ class GenComp {
         },
         {
           type: 'input',
-          message: '请输入组件名[中文, eg: 按钮组]',
+          message: '请输入组件名[中文, eg: 按钮]',
           name: 'labelName',
           validate: function (val) {
             if (!val || /[\u4e00-\u9fa5]/.test(val) !== true) {
@@ -105,12 +105,13 @@ class GenComp {
 
       const { compType, compName, labelName } = res
       const dashName = transCamel(compName)
-      const lowCompName = compName[0] + compName.substr(1)
+      const lowCompName = compName[0].toLowerCase() + compName.substr(1)
       const { cwd } = this
 
       const tplObj = {
         CompName: compName,
         DashName: dashName,
+        LabelName: labelName,
         lowCompName
       }
       // 2. 读取文件内容
@@ -118,15 +119,16 @@ class GenComp {
           'basic',
           'comp',
           'index.less',
+          'style.index.ts',
           'index.ts',
           'README',
           'spec',
           'types'
       ].map(item=>readFile(path.resolve(__dirname, `../static/comp/${item}.tpl`)))
 
-      const [demoTpl, compTpl, lessTpl, indexTpl, readmeTpl, specTpl, typesTpl] = await Promise.all(tplFiles)
+      const [demoTpl, compTpl, lessTpl, styleIndexTpl, indexTpl, readmeTpl, specTpl, typesTpl] = await Promise.all(tplFiles)
 
-      // 3. 输出文件
+      // 3. 组件输出文件
       const parseArr = [
         {
           dest: 'demos/basic.vue',
@@ -139,6 +141,10 @@ class GenComp {
         {
           dest: `style/index.less`,
           content: tplReplace(lessTpl, tplObj)
+        },
+        {
+          dest: `style/index.ts`,
+          content: tplReplace(styleIndexTpl, tplObj)
         },
         {
             dest: `index.ts`,
@@ -157,10 +163,24 @@ class GenComp {
           content: tplReplace(specTpl, tplObj)
         }
       ]
+
+      
       // 3.1 创建组件文件
       await Promise.all(parseArr.map(item =>
-        writeFile(`${cwd}/components/${compName}/${item.dest}`, item.content)
+        writeFile(`${cwd}/components/${dashName}/${item.dest}`, item.content)
       ))
+
+      // components.ts & style.ts
+      const [cpTpl, stTpl] =  await Promise.all([
+        readFile(path.resolve(__dirname, `../components/components.ts`)),
+        readFile(path.resolve(__dirname, `../components/style.ts`)),
+      ]) 
+
+      await Promise.all([
+        writeFile(`${cwd}/components/components.ts`, `${cpTpl}\nexport { default as ${compName} } from './${dashName}'`),
+        writeFile(`${cwd}/components/style.ts`, `${stTpl}\nimport './${dashName}/style'`),
+      ])
+
       // 3.2 写入component.json
       compJson[compType].children[compName] = {
         label: labelName

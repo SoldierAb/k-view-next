@@ -1,3 +1,3 @@
 <template>
-  <%DashName% />
+  <k-%DashName% />
 </template>

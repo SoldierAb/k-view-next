@@ -1,6 +1,6 @@
 [[toc]]
 
-## %label%
+## %CompName% %LabelName%
 
 
 ### 基础使用
