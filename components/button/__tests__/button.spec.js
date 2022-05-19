@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import Button from '../index'
 
-describe('KButton', () => {
+describe('Button', () => {
     it('renders correctly', () => {
         const wrapper = mount({
             render() {

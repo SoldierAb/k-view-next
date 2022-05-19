@@ -1,4 +1,4 @@
-import type { ButtonLocale } from "../Button" 
+import type { ButtonLocale } from "../buttonTypes" 
 
 const locale: ButtonLocale = {
     OkText: '确 定',
