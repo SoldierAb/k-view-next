@@ -77,7 +77,7 @@ config.options
     'image',
     function (tokens, idx) {
       const srcValue = tokens[idx].attrGet('src')
-      if (srcValue) {
+      if (srcValue && !srcValue.startsWith('http')) {
         tokens[idx].attrSet('src', process.env.PUBLIC_PATH + srcValue)
       }
     }

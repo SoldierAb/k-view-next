@@ -9,9 +9,9 @@ export default {
     return (
       <div class="docs-container">
         <div class="preview-container">
-            <div class="nav-box">
-              <Header />
-            </div>
+          <div class="nav-box">
+            <Header />
+          </div>
           <div class="preview-contents-box">
             <RouterView />
           </div>
