@@ -1,3 +1,12 @@
+## [1.0.3-alpha.6](https://github.com/SoldierAb/k-view-next/compare/v1.0.3-alpha.5...v1.0.3-alpha.6) (2022-05-20)
+
+
+### Bug Fixes
+
+* 🐛 delete useless code ([fc5fbf6](https://github.com/SoldierAb/k-view-next/commit/fc5fbf6f7bfd44adc843576b7feed1762f40c945))
+
+
+
 ## [1.0.3-alpha.5](https://github.com/SoldierAb/k-view-next/compare/v1.0.3-alpha.4...v1.0.3-alpha.5) (2022-05-20)
 
 
