@@ -1,3 +1,12 @@
+## [1.0.3-alpha.3](https://github.com/SoldierAb/k-view-next/compare/v1.0.3-alpha.2...v1.0.3-alpha.3) (2022-05-20)
+
+
+### Features
+
+* 🎸 add genComp script ([f99756e](https://github.com/SoldierAb/k-view-next/commit/f99756e6dcf54098940bef756b13b17b73e68fc8))
+
+
+
 ## [1.0.3-alpha.2](https://github.com/SoldierAb/k-view-next/compare/v1.0.3-alpha.1...v1.0.3-alpha.2) (2022-05-19)
 
 
