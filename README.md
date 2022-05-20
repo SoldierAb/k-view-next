@@ -106,9 +106,11 @@ yarn gen
 
 ### site preview
 
-![image](https://user-images.githubusercontent.com/33128022/169243265-f0828349-1e24-400b-857d-3987337b45fa.png)
+![image](https://user-images.githubusercontent.com/33128022/169243265-f0828349-1e24-400b-857d-3987337b45fa.png)%{width=1000}%
 
-![image](https://user-images.githubusercontent.com/33128022/169243400-008ddc8d-1607-47d7-8614-666718c9bd03.png)
+
+
+![image](https://user-images.githubusercontent.com/33128022/169243400-008ddc8d-1607-47d7-8614-666718c9bd03.png)%{width=1000}%
 
 ### Important
 The link anchor jump will be abnormal on the github io page. For private deployment, please modify the configuration items in .env.production.
