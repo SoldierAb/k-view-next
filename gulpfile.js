@@ -5,13 +5,10 @@ const gulpBabel = require("gulp-babel")
 const less =  require('gulp-less')
 const filter = require('gulp-filter')
 const autoprefixer = require('gulp-autoprefixer')
-const merge2 = require('merge2')
 const rimraf = require("rimraf")
 const through2 = require("through2")
 
 const { dirname } = require('path')
-
-const compileLess = require('./build/compileLess')
 
 const getBabelConf = require("./build/getBabelConf")
 
@@ -96,77 +93,6 @@ function compileStyles (){
     .pipe(gulp.dest(RESOURCES_MAP.dest.es)).pipe(gulp.dest(RESOURCES_MAP.dest.lib))
 }
 
-function compile(modules) {
-  const modulesDir = modules !== false ? libDir : esDir
-  // rimraf.sync(modulesDir);
-  // assets
-  // less
-  const lessSources = [
-    'components/**/*.less',
-  ]
-  const lessRes = gulp
-    .src(lessSources)
-    .pipe(
-      through2.obj(function (file, encoding, next) {
-        // less clone
-        this.push(file.clone())
-        if (
-          file.path.match(/\/style\/index\.less$/)
-          ) {
-          // less to css
-          compileLess(file.path).then(css => {
-            file.contents = Buffer.from(css)
-            file.path = file.path.replace(/\.less$/, '.css')
-            this.push(file)
-            next()
-          }).catch(e => {
-            console.error('less file compile error: ', e)
-          })
-        } else {
-          next()
-        }
-      }),
-    )
-    .pipe(gulp.dest(modulesDir))
-  // ts
-  let error = 0
-  const sources = [
-    'components/**/*.js',
-    'components/**/*.jsx',
-    'components/**/*.tsx',
-    'components/**/*.ts',
-    '!components/*/__tests__/*'
-  ]
-  const tsRes = gulp.src(sources).pipe(
-    ts(tsConf, {
-      error(e) {
-        tsDefaultReporter.error(e)
-        error = 1
-      },
-      finish: tsDefaultReporter.finish,
-    }),
-  )
-  // .pipe(gulp.dest(modulesDir))
-
-
-  function check() {
-    if (error && !process.argv['ignore-error']) {
-      process.exit(1)
-    }
-  }
-
-  tsRes.on('finish', check)
-  tsRes.on('end', check)
-
-  console.log('js--> ', tsRes.js)
-  console.log('jsx--** ', tsRes.jsx)
-  console.log(Object.keys(tsRes))
-  const tsFileStream = babelify(tsRes.js, modules) // ts 文件
-  const tsd = tsRes.dts.pipe(gulp.dest(modulesDir)) // d.ts声明文件
-  return merge2([
-    // lessRes, tsFileStream, tsd
-  ])
-}
 
 gulp.task('generate-dts', done => {
   generateDts().on('finish', done)
@@ -177,13 +103,11 @@ gulp.task('compile-styles', gulp.parallel(copyLess, compileStyles))
 gulp.task('compile-with-es', done => {
   console.log('start compile at ', startTime)
   console.log('[Parallel] Compile to es...')
-  // compile(false).on('finish', done)
   compileScripts('es', RESOURCES_MAP.dest.es).on('finish', done)
 })
 
 gulp.task('compile-with-lib', done => {
   console.log('[Parallel] Compile to js...')
-  // compile().on('finish', done)
   compileScripts('lib', RESOURCES_MAP.dest.lib).on('finish', done)
 })
 
