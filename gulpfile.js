@@ -2,7 +2,9 @@ const fs = require('fs')
 const ts = require("gulp-typescript")
 const gulp = require("gulp")
 const gulpBabel = require("gulp-babel")
-// const stripCode = require("gulp-strip-code")
+const less =  require('gulp-less')
+const filter = require('gulp-filter')
+const autoprefixer = require('gulp-autoprefixer')
 const merge2 = require('merge2')
 const rimraf = require("rimraf")
 const through2 = require("through2")
@@ -24,73 +26,74 @@ const libDir = getProjectPath("lib")
 const esDir = getProjectPath("es")
 const tsDefaultReporter = ts.reporter.defaultReporter()
 
-const tsFiles = ['**/*.ts', '**/*.tsx', '!node_modules/**/*.*', 'typings/**/*.d.ts']
-
-function compileTs(stream) {
-  return stream
-    .pipe(ts(tsConf))
-    .js.pipe(
-      through2.obj(function (file, encoding, next) {
-        // console.log(file.path, file.base);
-        file.path = file.path.replace(/\.[jt]sx$/, '.js')
-        this.push(file)
-        next()
-      }),
-    )
-    .pipe(gulp.dest(process.cwd()))
+const RESOURCES_MAP = {
+  dest:{
+    lib: libDir,
+    es: esDir
+  },
+  componentsScripts: [
+    'components/**/*.js',
+    'components/**/*.jsx',
+    'components/**/*.tsx',
+    'components/**/*.ts',
+    '!components/*/__tests__/*'
+  ],
+  styles: [
+    'components/**/*.less',
+  ]
 }
 
-gulp.task('tsc', () =>
-  compileTs(
-    gulp.src(tsFiles, {
-      base: cwd,
-    }),
-  ),
-)
-
-function replacePath(path) {
-  if (path.node.source && /\/lib\//.test(path.node.source.value)) {
-    const esModule = path.node.source.value.replace('/lib/', '/es/')
-    const esPath = dirname(getProjectPath('node_modules', esModule))
-    if (fs.existsSync(esPath)) {
-      path.node.source.value = esModule
-    }
-  }
-}
-
-function replaceLib() {
-  return {
-    visitor: {
-      ImportDeclaration: replacePath,
-      ExportNamedDeclaration: replacePath,
-    },
-  }
-}
-
-
-function babelify(js, modules) {
-  // 获取 babel 配置
+function compileScripts (format, dest){
+  // esm 资源构建，则设置  modules
+  const modules = format === 'es'? false : undefined
   const babelConf = getBabelConf(modules)
-  // 清除babel缓存文件夹属性
+
+  // 缓存清理
   babelConf.babelrc = false
   delete babelConf.cacheDirectory
-  if (modules === false) {
-    babelConf.plugins.push(replaceLib)
-  }
-  // 编译
-  let stream = js.pipe(gulpBabel(babelConf))
-  // .pipe()
-  // if (modules === "es") {
-  //   stream = stream.pipe(
-  //     stripCode({
-  //       start_comment: "@remove-on-es-build-begin",
-  //       end_comment: "@remove-on-es-build-end",
-  //     })
-  //   );
-  // }
-  // 返回文件流
-  const modulesDir = modules !== false ? libDir : esDir
-  return stream.pipe(gulp.dest(modulesDir))
+  
+  return gulp.src(RESOURCES_MAP.componentsScripts)
+    .pipe(gulpBabel(babelConf))
+    .pipe(through2.obj(function (file, encode, next){
+      
+      this.push(file.clone())
+      
+      // [comp]/style/css.js 文件生成, 提供以兼容使用方非less样式处理器（sass, stylus等）
+      if (file.path.match(/\/style\/index\.(js|ts|tsx)$/)) {
+        const content = file.contents.toString(encode);
+        file.contents = Buffer.from(
+          content
+            .replace(/\/style\/?'/g, "/style/css'")
+            .replace(/\/style\/?"/g, '/style/css"')
+            .replace(/\.less/g, '.css'),
+        );
+        file.path = file.path.replace(/index\.(js|ts|tsx)$/, 'css.js');
+        this.push(file);
+      }
+
+      next()
+    }))
+    .pipe(gulp.dest(dest))
+}
+
+function generateDts () {
+  // 仅生成声明文件
+  tsConf.emitDeclarationOnly = true
+  return gulp.src(RESOURCES_MAP.componentsScripts).pipe(ts(tsConf)).pipe(gulp.dest(RESOURCES_MAP.dest.es)).pipe(gulp.dest(RESOURCES_MAP.dest.lib))
+}
+
+function copyLess (){
+  return gulp.src(RESOURCES_MAP.styles).pipe(gulp.dest(RESOURCES_MAP.dest.es)).pipe(gulp.dest(RESOURCES_MAP.dest.lib))
+}
+
+function compileStyles (){
+  return gulp.src(RESOURCES_MAP.styles)
+    .pipe(less())
+    .pipe(autoprefixer())
+    .pipe(filter(function (file){ // 过滤空文件
+      return file.stat && file.contents.length
+    }))
+    .pipe(gulp.dest(RESOURCES_MAP.dest.es)).pipe(gulp.dest(RESOURCES_MAP.dest.lib))
 }
 
 function compile(modules) {
@@ -132,6 +135,7 @@ function compile(modules) {
     'components/**/*.jsx',
     'components/**/*.tsx',
     'components/**/*.ts',
+    '!components/*/__tests__/*'
   ]
   const tsRes = gulp.src(sources).pipe(
     ts(tsConf, {
@@ -142,6 +146,9 @@ function compile(modules) {
       finish: tsDefaultReporter.finish,
     }),
   )
+  // .pipe(gulp.dest(modulesDir))
+
+
   function check() {
     if (error && !process.argv['ignore-error']) {
       process.exit(1)
@@ -150,21 +157,34 @@ function compile(modules) {
 
   tsRes.on('finish', check)
   tsRes.on('end', check)
+
+  console.log('js--> ', tsRes.js)
+  console.log('jsx--** ', tsRes.jsx)
+  console.log(Object.keys(tsRes))
   const tsFileStream = babelify(tsRes.js, modules) // ts 文件
   const tsd = tsRes.dts.pipe(gulp.dest(modulesDir)) // d.ts声明文件
-  return merge2([lessRes, tsFileStream, tsd])
+  return merge2([
+    // lessRes, tsFileStream, tsd
+  ])
 }
 
+gulp.task('generate-dts', done => {
+  generateDts().on('finish', done)
+})
+
+gulp.task('compile-styles', gulp.parallel(copyLess, compileStyles))
 
 gulp.task('compile-with-es', done => {
   console.log('start compile at ', startTime)
   console.log('[Parallel] Compile to es...')
-  compile(false).on('finish', done)
+  // compile(false).on('finish', done)
+  compileScripts('es', RESOURCES_MAP.dest.es).on('finish', done)
 })
 
 gulp.task('compile-with-lib', done => {
   console.log('[Parallel] Compile to js...')
-  compile().on('finish', done)
+  // compile().on('finish', done)
+  compileScripts('lib', RESOURCES_MAP.dest.lib).on('finish', done)
 })
 
 gulp.task('clean-lib-es', done => {
@@ -176,7 +196,7 @@ gulp.task('clean-lib-es', done => {
 let startTime = new Date()
 gulp.task(
   'compile',
-  gulp.series('clean-lib-es', gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
+  gulp.series('clean-lib-es', gulp.parallel('compile-with-es', 'compile-with-lib', 'compile-styles', 'generate-dts'), done => {
     console.log('end compile at ', new Date())
     console.log('compile time ', (new Date() - startTime) / 1000, 's')
     done()
@@ -186,7 +206,7 @@ gulp.task(
 gulp.task(
   'compile-watch',
   done => {
-    gulp.watch(['components/**/*'], gulp.parallel('compile-with-es', 'compile-with-lib'))
+    gulp.watch(['components/**/*'], gulp.parallel('compile'))
     done()
   },
 )

@@ -27,9 +27,9 @@ module.exports = function (modules) {
         resolve("@babel/preset-env"),
         {
           modules,
-          targets: {
-            browsers: ["last 2 versions", "Firefox ESR", "> 1%", "not ie 11"],
-          },
+          // targets: {
+          //   browsers: ["last 2 versions", "Firefox ESR", "> 1%", "not ie 11"],
+          // },
         },
       ],
     ],
