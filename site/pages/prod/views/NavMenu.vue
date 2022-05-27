@@ -32,6 +32,7 @@ export default {
         window.open(navMenuDataSource[selectedKeys[0]].link);
         return;
       }
+      console.log(`/${selectedKeys[0]}`)
       this.$router.push(`/${selectedKeys[0]}`);
     },
     setSelectedKeys () {
