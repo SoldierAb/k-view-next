@@ -1,0 +1,1890 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TypeScript</title>
+
+		<meta name="description" content="Typescript 入门手册">
+		<meta name="author" content="GjChen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="external/reset.css">
+		<link rel="stylesheet" href="external/reveal.css">
+		<link rel="stylesheet" href="external/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>TypeScript</h3>
+					<p>
+						<small>
+							
+						</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Javascript</h2>
+					<p>
+						特点？
+					</p>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>动态性</h2>
+						<p>带来的问题？</p>
+					</section>
+					<section>
+						<h2>如有雷同，纯属巧合</h2>
+						<img src="./assets/word.png" alt="" srcset="" />
+						<img src="./assets/type.png" alt="" srcset="" />
+					</section>
+					<section>
+						<h2>最后</h2>
+						<img src="./assets/can-run.png" alt="" srcset="" />
+					</section>
+					<section>
+						<h2>运行时解析</h2>
+						<p>无法精确对应</p>
+						<p>代码难以阅读</p>
+						<p>变量、方法人肉推导</p>
+						<p>难以修改或重构</p>
+					</section>
+					<section>
+						<img src="./assets/pressure.png" alt="" srcset="">
+					</section>
+				</section>
+				<section>
+					<h2>TypeScript</h2>
+					<p>从入门到“精通”</p>
+				</section>
+				<section>
+					<iframe width="1440" height="500" src="https://www.typescriptlang.org/" frameborder="0"></iframe>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>总结</h2>
+					<p>动态类型</p>
+					<div class="r-hstack justify-center">
+						<div data-id="box1" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+						<div data-id="box2" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+						<div data-id="box3" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-hstack justify-center">
+						<div data-id="box1" data-auto-animate-delay="0" style="background: #1890ff; width: 150px; height: 100px; margin: 10px;">js</div>
+						<div data-id="box2" data-auto-animate-delay="0.1" style="background: orange; width: 150px; height: 100px; margin: 10px;">es 6+</div>
+						<div data-id="box3" data-auto-animate-delay="0.2" style="background: #52c41a; width: 150px; height: 100px; margin: 10px;">ts</div>
+					</div>
+					<h2 style="margin-top: 20px;">强类型</h2>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-stack">
+						<div data-id="box1" style="background: #1890ff; width: 300px; height: 300px; border-radius: 200px;"></div>
+						<div data-id="box2" style="background: orange; width: 200px; height: 200px; border-radius: 200px;"></div>
+						<div data-id="box3" style="background: #52c41a; width: 100px; height: 100px; border-radius: 200px;"></div>
+					</div>
+					<h2 style="margin-top: 20px;">Javascript的超集</h2>
+				</section>
+				<section>
+					<h2>基础</h2>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">原始数据类型</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 布尔类型
+						let isDone: boolean = false
+						// 数值
+						let aNum: number = 6
+						// 字符串
+						let str: string = 'Gorge'
+					</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h2 data-id="code-title">原始数据类型~空值</h2>
+					<p> JavaScript 没有空值（Void）的概念，在 TypeScript 中，可以用 void 表示没有任何返回值的函数 </p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function alertName(): void {
+							alert('My name is Tom');
+						}
+					</code></pre>
+				</section>
+				
+				<section data-auto-animate>
+					<p>声明一个 void 类型的变量没有什么用，因为你只能将它赋值为 undefined 和 null</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let unusable: void =  undefined
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">Null和Undefined</h2>
+					<p> 在 TypeScript 中，可以使用 null 和 undefined 来定义这两个原始数据类型 </p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let u: undefined = undefined;
+						let n: null = null;
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">Null和Undefined</h2>
+					<p> 与 void 的区别是，undefined 和 null 是所有类型的子类型。也就是说 undefined 类型的变量，可以赋值给 number 类型的变量 </p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 这样不会报错
+						let num: number = undefined;
+						let u: undefined;
+						let num: number = u;
+						let u: void;
+						
+						// Type 'void' is not assignable to type 'number'.
+						let num: number = u;
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型推论</h2>
+					<p>如果没有明确的指定类型，那么 TypeScript 会依照类型推论（Type Inference）的规则推断出一个类型。</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let num = 'seven';
+						num = 7;
+						// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">联合类型</h2>
+					<p>联合类型（Union Types）表示取值可以为多种类型中的一种</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let numStr: string | number;
+						numStr = 'seven';
+						numStr = 7;
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="code-title">访问联合类型的属性和方法</h3>
+					<p>当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function getLength(something: string | number): number {
+							return something.length;
+						}
+						// index.ts(2,22): error TS2339: Property 'length' does not exist on type 'string | number'.
+						//   Property 'length' does not exist on type 'number'.
+					</code></pre>
+				</section>
+				<section>
+					<p>访问 string 和 number 的共有属性是没问题的</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function getString(something: string | number): string {
+							return something.toString();
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<p>联合类型的变量在被赋值的时候，会根据类型推论的规则推断出一个类型</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let numStr: string | number;
+						numStr = 'seven';
+						console.log(numStr.length); // 5
+						numStr = 7;
+						console.log(numStr.length); // 编译时报错
+						// index.ts(5,30): error TS2339: Property 'length' does not exist on type 'number'.
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">对象的类型——接口</h2>
+					<p>在面向对象语言中，接口（Interfaces）是一个很重要的概念，它是对行为的抽象，而具体如何行动需要由类（classes）去实现（implement）。TypeScript 中的接口是一个非常灵活的概念，除了可用于对类的一部分行为进行抽象以外，也常用于对「对象的形状（Shape）」进行描述</p>
+					
+				</section>
+				<section data-auto-animate>
+					<h2 data-id="code-title">对象的类型——接口</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Person {
+							name: string;
+							age: number;
+							job?: string; // 可选属性
+						}
+						
+						let tom: Person = {
+							name: 'Tom',
+							age: 25,
+							// wife: '尤雨河'  // error
+						};
+						// ⚠️ 赋值的时候，变量的形状必须和接口的形状保持一致
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">对象的类型——接口</h2>
+					<p>任意属性</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Person {
+							name: string;
+							age?: number;
+							[key: string]: any;
+						}
+						
+						let tom: Person = {
+							name: 'Tom',
+							gender: 'male'
+						};
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">对象的类型——接口</h2>
+					<p>需要注意的是，一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Person {
+							name: string;
+							age?: number; // number 不是string的子集
+							[propName: string]: string;
+						}
+						
+						let tom: Person = {
+							name: 'Tom',
+							age: 25,
+							gender: 'male'
+						};
+						
+						// index.ts(3,5): error TS2411: Property 'age' of type 'number' is not assignable to string index type 'string'.
+						// index.ts(7,5): error TS2322: Type '{ [x: string]: string | number; name: string; age: number; gender: string; }' is not assignable to type 'Person'.
+						//   Index signatures are incompatible.
+						//     Type 'string | number' is not assignable to type 'string'.
+						//       Type 'number' is not assignable to type 'string'.
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">对象的类型——接口</h2>
+					<p>只读属性</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Person {
+							readonly id: number;
+							name: string;
+							age?: number;
+							[propName: string]: any;
+						}
+						let tom: Person = {
+							id: 89757,
+							name: 'Tom',
+							gender: 'male'
+						};
+						tom.id = 9527;
+						// index.ts(14,5): error TS2540: Cannot assign to 'id' because it is a constant or a read-only property.
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">对象的类型——接口</h2>
+					<p>注意，只读的约束存在于第一次给对象赋值的时候，而不是第一次给只读属性赋值的时候</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Person {
+							readonly id: number;
+							name: string;
+							age?: number;
+							[propName: string]: any;
+						}
+						
+						let tom: Person = {
+							name: 'Tom',
+							gender: 'male'
+						};
+						
+						tom.id = 89757;
+						
+						// index.ts(8,5): error TS2322: Type '{ name: string; gender: string; }' is not assignable to type 'Person'.
+						//   Property 'id' is missing in type '{ name: string; gender: string; }'.
+						// index.ts(13,5): error TS2540: Cannot assign to 'id' because it is a constant or a read-only property.	
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">数组类型</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let fibonacci: Array<number> = [1, 1, 2, 3, 5];
+						let fibonacci: number[] = [1, 1, 2, 3, 5];
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类数组</h2>
+					<p>事实上常用的类数组都有自己的接口定义，如 IArguments, NodeList, HTMLCollection 等</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function sum() {
+							let args: IArguments = arguments;
+						}
+					</code></pre>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>在 JavaScript 中，有两种常见的定义函数的方式——函数声明（Function Declaration）和函数表达式（Function Expression）</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 函数声明（Function Declaration）
+						function sum(x, y) {
+							return x + y;
+						}
+
+						// 函数表达式（Function Expression）
+						let mySum = function (x, y) {
+							return x + y;
+						};
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						一个函数有输入和输出，要在 TypeScript 中对其进行约束，需要把输入和输出都考虑到，其中函数声明的类型定义较简单
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function sum(x: number, y: number): number {
+							return x + y;
+						}
+						let mySum: (x: number, y: number) => number = function (x: number, y: number): number {
+							return x + y;
+						};
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						使用接口的方式来定义一个函数需要符合的形状
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface SearchFunc {
+							(source: string, subString: string): boolean;
+						}
+						
+						let mySearch: SearchFunc;
+						mySearch = function(source: string, subString: string) {
+							return source.search(subString) !== -1;
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						可选参数必须接在必需参数后面
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function buildName(firstName: string, lastName?: string) {
+							if (lastName) {
+								return firstName + ' ' + lastName;
+							} else {
+								return firstName;
+							}
+						}
+						let tomcat = buildName('Tom', 'Cat');
+						let tom = buildName('Tom');
+					</code></pre>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						参数默认值， ⚠️ TypeScript 会将添加了默认值的参数识别为可选参数
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function buildName(firstName: string, lastName: string = 'Cat') {
+							return firstName + ' ' + lastName;
+						}
+						let tomcat = buildName('Tom', 'Cat');
+						let tom = buildName('Tom');
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						此时就不受「可选参数必须接在必需参数后面」的限制了
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function buildName(firstName: string = 'Tom', lastName: string) {
+							return firstName + ' ' + lastName;
+						}
+						let tomcat = buildName('Tom', 'Cat');
+						let cat = buildName(undefined, 'Cat');
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						ES6 中，可以使用 ...rest 的方式获取函数中的剩余参数（rest 参数）
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function push(array, ...items) {
+							items.forEach(function(item) {
+								array.push(item);
+							});
+						}
+						
+						let a: any[] = [];
+						push(a, 1, 2, 3);
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						事实上，items 是一个数组。所以我们可以用数组的类型来定义它
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function push(array: any[], ...items: any[]) {
+							items.forEach(function(item) {
+								array.push(item);
+							});
+						}
+						
+						let a = [];
+						push(a, 1, 2, 3);
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>
+						重载 允许一个函数接受不同数量或类型的参数时，作出不同的处理
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function reverse(x: number | string): number | string | void {
+							if (typeof x === 'number') {
+								return Number(x.toString().split('').reverse().join(''));
+							} else if (typeof x === 'string') {
+								return x.split('').reverse().join('');
+							}
+						}
+						// ⚠️ 然而这样有一个缺点，就是不能够精确的表达，输入为数字的时候，输出也应该为数字，输入为字符串的时候，输出也应该为字符串
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">函数</h2>
+					<p>我们重复定义了多次函数 reverse，前几次都是函数定义，最后一次是函数实现。在编辑器的代码提示中，可以正确的看到前两个提示重载 允许一个函数接受不同数量或类型的参数时，作出不同的处理
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function reverse(x: number): number;
+						function reverse(x: string): string;
+						function reverse(x: number | string): number | string | void {
+							if (typeof x === 'number') {
+								return Number(x.toString().split('').reverse().join(''));
+							} else if (typeof x === 'string') {
+								return x.split('').reverse().join('');
+							}
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						值 as 类型
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						将一个联合类型断言为其中一个类型
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Cat {
+							name: string;
+							run(): void;
+						}
+						interface Fish {
+							name: string;
+							swim(): void;
+						}
+						function isFish(animal: Cat | Fish) {
+							if (typeof animal.swim === 'function') {
+								return true;
+							}
+							return false;
+						}
+						// index.ts:11:23 - error TS2339: Property 'swim' does not exist on type 'Cat | Fish'.
+						//   Property 'swim' does not exist on type 'Cat'.
+					</code></pre>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						此时可以使用类型断言，将 animal 断言成 Fish
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Cat {
+							name: string;
+							run(): void;
+						}
+						interface Fish {
+							name: string;
+							swim(): void;
+						}
+						
+						function isFish(animal: Cat | Fish) {
+							if (typeof (animal as Fish).swim === 'function') {
+								return true;
+							}
+							return false;
+						}
+					</code></pre>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						将一个父类断言为更加具体的子类
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						class ApiError extends Error {
+							code: number = 0;
+						}
+						class HttpError extends Error {
+							statusCode: number = 200;
+						}
+						
+						function isApiError(error: Error) {
+							if (typeof (error as ApiError).code === 'number') {
+								return true;
+							}
+							return false;
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						更优的方式？ instanceof
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// ApiError 是一个 JavaScript 的类，能够通过 instanceof 来判断 error 是否是它的实例
+						class ApiError extends Error {
+							code: number = 0;
+						}
+						class HttpError extends Error {
+							statusCode: number = 200;
+						}
+						
+						function isApiError(error: Error) {
+							if (error instanceof ApiError) {
+								return true;
+							}
+							return false;
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						⚠️ ApiError是一个接口，instanceof并不是更优的方式
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface ApiError extends Error {
+							code: number;
+						}
+						interface HttpError extends Error {
+							statusCode: number;
+						}
+						
+						function isApiError(error: Error) {
+							if (error instanceof ApiError) {
+								return true;
+							}
+							return false;
+						}
+						// index.ts:9:26 - error TS2693: 'ApiError' only refers to a type, but is being used as a value here.
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						此时就只能用类型断言，通过判断是否存在 code 属性，来判断传入的参数是不是 ApiError
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface ApiError extends Error {
+							code: number;
+						}
+						interface HttpError extends Error {
+							statusCode: number;
+						}
+						
+						function isApiError(error: Error) {
+							if (typeof (error as ApiError).code === 'number') {
+								return true;
+							}
+							return false;
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">类型断言</h2>
+					<p>
+						将任何一个类型断言为 any
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						(window as any).foo = 1;
+						// ⚠️ 它极有可能掩盖了真正的类型错误，所以如果不是非常确定，就不要使用 as any。
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<p>
+						将 any 断言为一个具体的类型
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 历史遗留的代码中有个 getCacheData，它的返回值是 any
+						function getCacheData(key: string): any {
+							return (window as any).cache[key];
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<p>
+						那么我们在使用它时，最好能够将调用了它之后的返回值断言成一个精确的类型，这样就方便了后续的操作
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function getCacheData(key: string): any {
+							return (window as any).cache[key];
+						}
+						
+						interface Cat {
+							name: string;
+							run(): void;
+						}
+						
+						const tom = getCacheData('tom') as Cat;
+						tom.run();
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>断言限制</h2>
+					<ul>
+						<li>联合类型可以被断言为其中一个类型</li>
+						<li>父类可以被断言为子类</li>
+						<li>任何类型都可以被断言为 any</li>
+						<li>any 可以被断言为任何类型</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2>断言限制</h2>
+					<p>
+						⚠️ 除非迫不得已，千万别用双重断言
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Cat {
+							run(): void;
+						}
+						interface Fish {
+							swim(): void;
+						}
+						
+						function testCat(cat: Cat) {
+							return (cat as any as Fish);
+						}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言&类型转换</h2>
+					<p>
+						类型断言只会影响 TypeScript 编译时的类型，类型断言语句在编译结果中会被删除
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function toBoolean(something: any): boolean {
+							return something as boolean;
+						}
+						toBoolean(1);
+						// 返回值为 1
+						// ⚠️ 类型断言不是类型转换，它不会真的影响到变量的类型
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言&类型转换</h2>
+					<p>
+						若要进行类型转换，需要直接调用类型转换的方法
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function toBoolean(something: any): boolean {
+							return Boolean(something);
+						}
+						
+						toBoolean(1);
+						// 返回值为 true
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>
+						我们使用 as Cat 将 any 类型断言为了 Cat 类型
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function getCacheData(key: string): any {
+							return (window as any).cache[key];
+						}
+						
+						interface Cat {
+							name: string;
+							run(): void;
+						}
+						
+						const tom = getCacheData('tom') as Cat;
+						tom.run();
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>
+						实际上还有其他方式可以解决这个问题
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						function getCacheData(key: string): any {
+							return (window as any).cache[key];
+						}
+						
+						interface Cat {
+							name: string;
+							run(): void;
+						}
+						
+						const tom: Cat = getCacheData('tom');
+						tom.run();
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>区别是什么？</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>区别是什么？</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface Animal {
+							name: string;
+						}
+						interface Cat {
+							name: string;
+							run(): void;
+						}
+						
+						const animal: Animal = {
+							name: 'tom'
+						};
+						let tom = animal as Cat;
+						// ⚠️ 
+						let tom: Cat = animal;
+						// index.ts:12:5 - error TS2741: Property 'run' is missing in type 'Animal' but required in type 'Cat'.
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>区别是什么？</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// animal 断言为 Cat，只需要满足 Animal 兼容 Cat 或 Cat 兼容 Animal 即可
+						let tom = animal as Cat;
+						// animal 赋值给 tom，需要满足 Cat 兼容 Animal 才行
+						let tom: Cat = animal;
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>
+						⚠️ 所以为了增加代码的质量，我们最好优先使用类型声明，这也比类型断言的 as 语法更加优雅
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 类型声明</h2>
+					<p>
+						还有更优的方式么？
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2>类型断言 vs 泛型</h2>
+					<p>
+						通过给 getCacheData 函数添加了一个泛型 T，我们可以更加规范的实现对 getCacheData 返回值的约束，这也同时去除掉了代码中的 any，是最优的一个解决方案
+					</p>
+					<img src="./assets/fan-x.png" alt="" srcset="">
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明</h2>
+					<p>
+						当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						declare var // 声明全局变量
+						declare let // 声明全局变量
+						declare const // 声明全局变量(⚠️常用)
+						declare function //声明全局方法
+						declare class // 声明全局类
+						declare enum //声明全局枚举
+						declare namespace //声明（含有子属性的）全局对象
+						interface 、 type //声明全局类型
+						export //导出变量
+						export namespace // 导出（含有子属性的）对象
+						export default //ES6默认导出
+						export = // commonjs 导出模块
+						export as namespace // UMD库声明全局变量
+						declare global // 拓展全局变量
+						declare module // 拓展模块
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明语句</h2>
+					<p>
+						假如我们想使用第三方库 jQuery，一种常见的方式是在 html 中通过 script 标签引入 jQuery，然后就可以使用全局变量 `$` 或 `jQuery` 了。
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						$('#foo');
+						// or
+						jQuery('#foo');
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明语句</h2>
+					<p>
+						但是在 ts 中，编译器并不知道 `$` 或 `jQuery` 是什么东西，我们需要使用 `declare var` 来定义它的类型
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						declare var jQuery: (selector: string) => any;
+						
+						jQuery('#foo');
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明文件</h2>
+					<p>
+						通常我们会把声明语句放到一个单独的文件（jQuery.d.ts）中，这就是声明文件，
+						一般来说，ts 会解析项目中所有的 *.ts 文件，当然也包含以 .d.ts 结尾的文件。所以当我们将 jQuery.d.ts 放到项目中时，其他所有 *.ts 文件就都可以获得 jQuery 的类型定义了。
+						⚠️ 声明文件必需以 .d.ts 为后缀。
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						├── src
+						|  ├── index.ts
+						|  └── jQuery.d.ts
+						└── tsconfig.json
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明文件</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/jQuery.d.ts
+						// 函数重载
+						declare function jQuery(selector: string): any;
+						declare function jQuery(domReadyCallback: () => any): any;
+						
+						// src/index.ts
+						jQuery('#foo');
+						jQuery(function() {
+							alert('Dom Ready!');
+						});
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明文件-namespace</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/jQuery.d.ts
+						declare namespace jQuery {
+							function ajax(url: string, settings?: any): void;
+							const version: number;
+							class Event {
+								blur(eventType: EventType): void
+							}
+							enum EventType {
+								CustomClick
+							}
+						}
+
+						// src/index.ts
+						jQuery.ajax('/api/get_something');
+						console.log(jQuery.version);
+						const e = new jQuery.Event();
+						e.blur(jQuery.EventType.CustomClick);
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明文件-嵌套的namespace</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/jQuery.d.ts
+						declare namespace jQuery {
+							function ajax(url: string, settings?: any): void;
+							namespace fn {
+								function extend(object: any): void;
+							}
+						}
+
+						// src/index.ts
+						jQuery.ajax('/api/get_something');
+						jQuery.fn.extend({
+							check: function() {
+								return this.each(function() {
+									this.checked = true;
+								});
+							}
+						});
+					</code></pre>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2>声明文件-interface、type</h2>
+					<p>除了全局变量之外，我们可能需要暴露一些全局的类型。 在声明文件中，我们可以直接使用 interface 或 type 来声明一个全局的接口或类型</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/jQuery.d.ts
+						interface AjaxSettings {
+							method?: 'GET' | 'POST'
+							data?: any;
+						}
+						declare namespace jQuery {
+							function ajax(url: string, settings?: AjaxSettings): void;
+						}
+
+						// src/index.ts
+						let settings: AjaxSettings = {
+							method: 'POST',
+							data: {
+								name: 'foo'
+							}
+						};
+						jQuery.ajax('/api/post_something', settings);
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明文件-interface、type</h2>
+					<p>
+						暴露在最外层的 interface 或 type 会作为全局类型作用于整个项目中，我们应该尽可能的减少全局变量或全局类型的数量。故最好将他们放到 namespace 下
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/jQuery.d.ts
+						declare namespace jQuery {
+							interface AjaxSettings {
+								method?: 'GET' | 'POST'
+								data?: any;
+							}
+							function ajax(url: string, settings?: AjaxSettings): void;
+						}
+
+						// src/index.ts
+						let settings: jQuery.AjaxSettings = {
+							method: 'POST',
+							data: {
+								name: 'foo'
+							}
+						};
+						jQuery.ajax('/api/post_something', settings);
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h2>声明合并</h2>
+					<p>
+						jQuery 既是一个函数，可以直接被调用 jQuery('#foo')，又是一个对象，拥有子属性 jQuery.ajax()
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/jQuery.d.ts
+						declare function jQuery(selector: string): any;
+						declare namespace jQuery {
+							function ajax(url: string, settings?: any): void;
+						}
+
+						// src/index.ts
+						jQuery('#foo');
+						jQuery.ajax('/api/get_something');
+					</code></pre>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2>npm包</h2>
+					<p>
+						一般我们通过 import foo from 'foo' 导入一个 npm 包，这是符合 ES6 模块规范的。
+					</p>
+					<p>
+						在我们尝试给一个 npm 包创建声明文件之前，需要先看看它的声明文件是否已经存在。一般来说，npm 包的声明文件可能存在于两个地方：
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2>npm包</h2>
+					<ul>
+						<li>
+							1.与该 npm 包绑定在一起。判断依据是 package.json 中有 types 字段，或者有一个 index.d.ts 声明文件。这种模式不需要额外安装其他包，是最为推荐的，所以以后我们自己创建 npm 包的时候，最好也将声明文件与 npm 包绑定在一起。
+						</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2>npm包</h2>
+					<ul>
+						<li>
+							2.发布到 @types 里。我们只需要尝试安装一下对应的 @types 包就知道是否存在该声明文件，安装命令是 npm install @types/foo --save-dev。这种模式一般是由于 npm 包的维护者没有提供声明文件，所以只能由其他人将声明文件发布到 @types 里了。
+						</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2>npm包</h2>
+					<p>
+						假如以上两种方式都没有找到对应的声明文件，那么我们就需要自己为它写声明文件了。由于是通过 import 语句导入的模块，所以声明文件存放的位置也有所约束，一般有两种方案：
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2>npm包</h2>
+					<ul>
+						<li>
+							1.创建一个 node_modules/@types/foo/index.d.ts 文件，存放 foo 模块的声明文件。这种方式不需要额外的配置，但是 node_modules 目录不稳定，代码也没有被保存到仓库中，无法回溯版本，有不小心被删除的风险，故不太建议用这种方案，一般只用作临时测试。
+						</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2>npm包</h2>
+					<ul>
+						<li>
+							2.创建一个 types 目录，专门用来管理自己写的声明文件，将 foo 的声明文件放到 types/foo/index.d.ts 中。这种方式需要配置下 tsconfig.json 中的 paths 和 baseUrl 字段。
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 目录结构 /path/to/project
+						├── src
+						|  └── index.ts
+						├── types
+						|  └── foo
+						|     └── index.d.ts
+						└── tsconfig.json
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// tsconfig.json
+						{
+							"compilerOptions": {
+								"module": "commonjs",
+								"baseUrl": "./",
+								"paths": {
+									"*": ["types/*"]
+								}
+							}
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>
+						如此配置之后，通过 import 导入 foo 的时候，也会去 types 目录下寻找对应的模块的声明文件了
+					</p>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>主要语法</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						export // 导出变量
+						export namespace  // 导出（含有子属性的）对象
+						export default // ES6默认导出
+						export =  // commonjs 导出模块
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>对应的导出模块</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/foo/index.d.ts
+						export const name: string;
+						export function getName(): string;
+						export class Animal {
+							constructor(name: string: string);
+							sayHi(): string;
+						}
+						export enum Directions {
+							Up,
+							Down,
+							Left,
+							Right
+						}
+						export interface Options {
+							data: any;
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>对应使用模块</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// src/index.ts
+
+						import { name, getName, Animal, Directions, Options } from 'foo';
+
+						console.log(name);
+						let myName = getName();
+						let cat = new Animal('Tom');
+						let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+						let options: Options = {
+							data: {
+								name: 'foo'
+							}
+						};
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>混用declare和export</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/foo/index.d.ts
+
+						declare const name: string;
+						declare function getName(): string;
+						declare class Animal {
+							constructor(name: string: string);
+							sayHi(): string;
+						}
+						declare enum Directions {
+							Up,
+							Down,
+							Left,
+							Right
+						}
+						interface Options {
+							data: any;
+						}
+
+						export { name, getName, Animal, Directions, Options };
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>export default</p>
+					<p>
+						⚠️ 注意，只有 function、class 和 interface 可以直接默认导出，其他的变量需要先定义出来，再默认导出
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/foo/index.d.ts
+						export default enum Directions {
+						// ERROR: Expression expected.
+							Up,
+							Down,
+							Left,
+							Right
+						}
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>npm包</h2>
+					<p>export default</p>
+					<p>
+						⚠️ 注意，只有 function、class 和 interface 可以直接默认导出，其他的变量需要先定义出来，再默认导出
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/foo/index.d.ts
+
+						export default Directions; // 默认导出推荐置顶
+							
+						declare enum Directions {
+							Up,
+							Down,
+							Left,
+							Right
+						}
+							
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>
+						在 commonjs 规范中，我们用以下方式来导出一个模块
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 整体导出
+						module.exports = foo;
+						// 单个导出
+						exports.bar = bar;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>
+						在 ts 中，针对这种模块导出，有多种方式可以导入，第一种方式是 const ... = require
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 整体导入
+						const foo = require('foo');
+						// 单个导入
+						const bar = require('foo').bar;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>
+						第二种方式是 import ... from，注意针对整体导出，需要使用 import * as 来导入
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 整体导入
+						import * as foo from 'foo';
+						// 单个导入
+						import { bar } from 'foo';
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>npm包</h2>
+					<p>
+						第三种方式是 import ... require，这也是 ts 官方推荐的方式
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 整体导入
+						import foo = require('foo');
+						// 单个导入
+						import bar = foo.bar;
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>UMD库</h2>
+					<p>
+						export as namespace
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 一般使用 export as namespace 时，都是先有了 npm 包的声明文件，再基于它添加一条 export as namespace 语句，即可将声明好的一个变量声明为全局变量
+						
+						// types/foo/index.d.ts
+						export as namespace foo;
+						export = foo;
+
+						declare function foo(): string;
+						declare namespace foo {
+							const bar: number;
+						}
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>拓展全局变量</h2>
+					<p>
+						有的第三方库扩展了一个全局变量，可是此全局变量的类型却没有相应的更新过来，就会导致 ts 编译错误，此时就需要扩展全局变量的类型。比如扩展 String 类型
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						interface String {
+							prependHello(): string;
+						}
+						
+						'foo'.prependHello();
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>拓展全局变量</h2>
+					<p>
+						通过声明合并，使用 interface String 即可给 String 添加属性或方法。
+						也可以使用 declare namespace 给已有的命名空间添加类型声明
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/jquery-plugin/index.d.ts
+						declare namespace JQuery {
+							interface CustomOptions {
+								bar: string;
+							}
+						}
+						interface JQueryStatic {
+							foo(options: JQuery.CustomOptions): string;
+						}
+
+						// src/index.ts
+						jQuery.foo({
+							bar: ''
+						});
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>在 npm 包或 UMD 库中拓展全局变量</h2>
+					<p>
+						如之前所说，对于一个 npm 包或者 UMD 库的声明文件，只有 export 导出的类型声明才能被导入。所以对于 npm 包或 UMD 库，如果导入此库之后会扩展全局变量，则需要使用另一种语法在声明文件中扩展全局变量的类型，那就是 declare global
+					</p>
+				</section>
+
+				<section>
+					<h2>在 npm 包或 UMD 库中拓展全局变量</h2>
+					<p>
+						此声明文件不需要导出任何东西，仍然需要导出一个空对象，用来告诉编译器这是一个模块的声明文件，而不是一个全局变量的声明文件
+					</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/foo/index.d.ts
+						declare global {
+							interface String {
+								prependHello(): string;
+							}
+						}
+
+						export {};
+						
+						// src/index.ts
+						'bar'.prependHello();
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>拓展原有模块declare module</h2>
+					<p>如果是需要扩展原有模块的话，需要在类型声明文件中先引用原有模块，再使用 declare module 扩展原有模块</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/moment-plugin/index.d.ts
+						import * as moment from 'moment';
+
+						declare module 'moment' {
+							export function foo(): moment.CalendarKey;
+						}
+
+						// src/index.ts
+						import * as moment from 'moment';
+						import 'moment-plugin';
+
+						moment.foo();
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<p>一个声明文件有时会依赖另一个声明文件中的类型，比如在前面的 declare module 的例子中，我们就在声明文件中导入了 moment，并且使用了 moment.CalendarKey 这个类型</p>
+				</section>
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// types/moment-plugin/index.d.ts
+						import * as moment from 'moment';
+
+						declare module 'moment' {
+							export function foo(): moment.CalendarKey;
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<p>还有一个语法也可以用来导入另一个声明文件，那就是三斜线指令</p>
+				</section>
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<p>区别是？是什么场景下使用？</p>
+				</section>
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<ul>
+						<li>当我们在书写一个全局变量的声明文件时</li>
+						<li>当我们需要依赖一个全局变量的声明文件时</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<p>当我们在书写一个全局变量的声明文件时</p>
+					<p>
+						在全局变量的声明文件中，是不允许出现 import, export 关键字的。一旦出现了，那么他就会被视为一个 npm 包或 UMD 库，就不再是全局变量的声明文件了。故当我们在书写一个全局变量的声明文件时，如果需要引用另一个库的类型，那么就必须用三斜线指令了
+					</p>
+				</section>
+
+				<section>
+					<h2>声明文件中的依赖</h2>
+					<p>当我们在书写一个全局变量的声明文件时</p>
+					<img src="./assets/reference.png" alt="" srcset="">
+				</section>
+
+				<section>
+					<h2>依赖一个全局变量的生命文件</h2>
+					<p>我们需要依赖一个全局变量的声明文件时，由于全局变量不支持通过 import 导入，当然也就必须使用三斜线指令来引入了</p>
+					<img src="./assets/global-declare.png" alt="" srcset="">
+				</section>
+
+				<section>
+					<h2>拆分声明文件</h2>
+					<img src="./assets/declare-global.png" alt="" srcset="">
+				</section>
+
+
+				<section>
+					<h2>类型别名</h2>
+					<p>类型别名用来给一个类型起个新名字</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						type Name = string;
+						type NameResolver = () => string;
+						type NameOrResolver = Name | NameResolver;
+						function getName(n: NameOrResolver): Name {
+							if (typeof n === 'string') {
+								return n;
+							} else {
+								return n();
+							}
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>字符串字面量类型</h2>
+					<p>字符串字面量类型用来约束取值只能是某几个字符串中的一个</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						type EventNames = 'click' | 'scroll' | 'mousemove';
+						function handleEvent(ele: Element, event: EventNames) {
+							// do something
+						}
+
+						handleEvent(document.getElementById('hello'), 'scroll');  // 没问题
+						handleEvent(document.getElementById('world'), 'dblclick'); // 报错，event 不能为 'dblclick'
+						// index.ts(7,47): error TS2345: Argument of type '"dblclick"' is not assignable to parameter of type 'EventNames'.
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>元组</h2>
+					<p>数组合并了相同类型的对象，而元组（Tuple）合并了不同类型的对象</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						let tom: [string, number] = ['Tom', 25];
+						let tom: [string, number];
+						tom[0] = 'Tom'; // pass
+						tom = ['Tom']; // error 当直接对元组类型的变量进行初始化或者赋值的时候，需要提供所有元组类型中指定的项
+						// Property '1' is missing in type '[string]' but required in type '[string, number]'.
+
+						tom.push(1);
+						tom.push(true); // 越界元素不可添加
+						// Argument of type 'true' is not assignable to parameter of type 'string | number'.
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>枚举</h2>
+					<p>枚举成员会被赋值为从 0 开始递增的数字，同时也会对枚举值到枚举名进行反向映射</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						// 可手动赋值， 
+						// ⚠️ 但要避免 未手动赋值的枚举项与手动赋值的重复， TypeScript 是不会察觉到这一点的
+						enum Days {Sun = 7, Mon = 1, Tue, Wed, Thu, Fri, Sat};
+
+						console.log(Days["Sun"] === 7); // true
+						console.log(Days["Mon"] === 1); // true
+						console.log(Days["Tue"] === 2); // true
+						console.log(Days["Sat"] === 6); // true
+
+						console.log(Days[7] === "Sun"); // true
+						console.log(Days[1] === "Mon"); // true
+						console.log(Days[2] === "Tue"); // true
+						console.log(Days[6] === "Sat"); // true
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>常数项和计算所得项</h3>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						enum Color {Red, Green, Blue = "blue".length};
+
+						enum Color {Red = "red".length, Green, Blue};
+						// index.ts(1,33): error TS1061: Enum member must have initializer.
+						// index.ts(1,40): error TS1061: Enum member must have initializer.
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>常数枚举</h3>
+					<p>常数枚举是使用 const enum 定义的枚举类型</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						const enum Directions {
+							Up,
+							Down,
+							Left,
+							Right
+						}
+						
+						let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+						// ⚠️ 常数枚举与普通枚举的区别是，它会在编译阶段被 删除，并且不能包含计算成员
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>外部枚举</h3>
+					<p>外部枚举（Ambient Enums）是使用 declare enum 定义的枚举类型</p>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						declare enum Directions {
+							Up,
+							Down,
+							Left,
+							Right
+						}
+						
+						let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+					</code></pre>
+				</section>
+
+				<section>
+					<section>类Class</section>
+					<section>封装、继承、多态</section>
+					<section>存取器（getter、setter）</section>
+					<section>修饰符（public、protect、private）</section>
+					<section>抽象类</section>
+					<section>接口（interface）、实现（implements）</section>
+				</section>
+
+				<section>
+					<section>
+						<h2 data-id="code-title">ES6</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							class Animal {
+								public name;
+								constructor(name: string) {
+									this.name = name;
+								}
+								sayHi(): string {
+									return `My name is ${this.name}`;
+								}
+							}
+							
+							let a = new Animal('Jack');
+							console.log(a.sayHi()); // My name is Jack
+						</code></pre>
+					</section>
+					<section>
+						<h2 data-id="code-title">继承</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							class Cat extends Animal {
+								constructor(name: string) {
+								  super(name); // 调用父类的 constructor(name: string)
+								  console.log(this.name);
+								}
+								sayHi(): string {
+								  return 'Meow, ' + super.sayHi(); // 调用父类的 sayHi()
+								}
+							}
+							  
+							let c = new Cat('Tom'); // Tom
+							console.log(c.sayHi()); // Meow, My name is Tom
+						</code></pre>
+					</section>
+					<section>
+						<h2 data-id="code-title">存取器</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							class Animal {
+								constructor(name: string) {
+									this.name = name;
+								}
+								get name(): string {
+									return 'Jack';
+								}
+								set name(value) {
+									console.log('setter: ' + value);
+								}
+							}
+								
+							let a = new Animal('Kitty'); // setter: Kitty
+							a.name = 'Tom'; // setter: Tom
+							console.log(a.name); // Jack
+						</code></pre>
+					</section>
+					<section>
+						<h2 data-id="code-title">静态方法</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							class Animal {
+								static isAnimal(a) {
+								  return a instanceof Animal;
+								}
+							}
+							
+							let a = new Animal('Jack');
+							Animal.isAnimal(a); // true
+							a.isAnimal(a); // TypeError: a.isAnimal is not a function
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>es7</h3>
+						<p>ES6 中实例的属性只能通过构造函数中的 this.xxx 来定义，ES7 提案中可以直接在类里面定义</p>
+					</section>
+					<section>
+						<h3>es7</h3>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							class Animal {
+								name = 'Jack';
+
+								static tall = 180;
+							  
+								constructor() {
+								  // ...
+								}
+							}
+							  
+							let a = new Animal();
+							console.log(a.name); // Jack
+							  
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<ul>
+						<li>public</li>
+						<li>private</li>
+						<li>protected</li>
+						<li>readonly</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<section>
+						<h3>类实现接口</h3>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							interface Alarm {
+								alert(): void;
+							}
+							
+							class Door {
+							}
+							
+							class SecurityDoor extends Door implements Alarm {
+								alert() {
+									console.log('SecurityDoor alert');
+								}
+							}
+							
+							class Car implements Alarm {
+								alert() {
+									console.log('Car alert');
+								}
+							}
+						</code></pre>
+					</section>
+					<section>
+						<h3>类实现多个接口</h3>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							interface Alarm {
+								alert(): void;
+							}
+							
+							interface Light {
+								lightOn(): void;
+								lightOff(): void;
+							}
+							
+							class Car implements Alarm, Light {
+								alert() {
+									console.log('Car alert');
+								}
+								lightOn() {
+									console.log('Car light on');
+								}
+								lightOff() {
+									console.log('Car light off');
+								}
+							}
+						</code></pre>
+					</section>
+					<section>
+						<h3>接口继承接口</h3>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							interface Alarm {
+								alert(): void;
+							}
+							
+							interface LightableAlarm extends Alarm {
+								lightOn(): void;
+								lightOff(): void;
+							}
+						</code></pre>
+					</section>
+					<section>
+						<h3>接口继承类</h3>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							class Point {
+								x: number;
+								y: number;
+								constructor(x: number, y: number) {
+									this.x = x;
+									this.y = y;
+								}
+							}
+							
+							interface Point3d extends Point {
+								z: number;
+							}
+							
+							let point3d: Point3d = {x: 1, y: 2, z: 3};
+						</code></pre>
+					</section>
+				</section>
+
+
+				<section>
+					<section>
+						<h2>泛型</h2>
+					</section>
+					<section>
+						<p>简单例子, 如何优化？</p>
+						<img src="./assets/fanxin-1.png" alt="" srcset="">
+					</section>
+					<section>
+						<p>简单例子</p>
+						<img src="./assets/fanxin.png" alt="" srcset="">
+					</section>
+					<section>
+						<p>简单例子</p>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							// 也可不指定类型，让ts自动推算
+							createArray(3, 'x') 
+						</code></pre>
+					</section>
+					<section>
+						<h3>多个类型</h3>
+						<img src="./assets/fanxin-mul.png" alt="" srcset="">
+					</section>
+					<section>
+						<h3>泛型约束</h3>
+						<p>在函数内部使用泛型变量的时候，由于事先不知道它是哪种类型，所以不能随意的操作它的属性或方法</p>
+						<img src="./assets/fanxin-error.png" alt="" srcset="">
+					</section>
+					<section>
+						<h3>泛型约束</h3>
+						<p>我们可以对泛型进行约束，只允许这个函数传入那些包含 length 属性的变量</p>
+						<img src="./assets/fanxin-limit.png" alt="" srcset="">
+					</section>
+					<section>
+						<h3>多个类型参数之间也可以互相约束</h3>
+						<p>使用了两个类型参数，其中要求 T 继承 U，这样就保证了 U 上不会出现 T 中不存在的字段</p>
+						<img src="./assets/fanxin-copy.png" alt="" srcset="">
+					</section>
+					<section>
+						<h3>泛型接口</h3>
+						<p>上面我们了解到，可以使用接口的方式来定义一个函数需要符合的形状</p>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							interface SearchFunc {
+								(source: string, subString: string): boolean;
+							}
+							  
+							let mySearch: SearchFunc;
+							mySearch = function(source: string, subString: string) {
+								return source.search(subString) !== -1;
+							}
+						</code></pre>
+					</section>
+					<section>
+						<h3>泛型接口</h3>
+						<p>当然也可以使用含有泛型的接口来定义函数的形状</p>
+						<img src="./assets/fanxin-interface.png" alt="" srcset="">
+					</section>
+					<section>
+						<h2>泛型类</h2>
+						<p>与泛型接口类似，泛型也可以用于类的类型定义中</p>
+						<img src="./assets/fanxin-class.png" alt="" srcset="">
+					</section>
+				</section>
+
+				<section>
+					<h2>入门结束</h2>
+				</section>
+
+				<section>
+					<h2>webpack5+vue3+ts组件库</h2>
+					<p><a href="https://github.com/SoldierAb/k-view-next" target="_blank" rel="noopener noreferrer">K-View-Next</a></p>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="external/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
