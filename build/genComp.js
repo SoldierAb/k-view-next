@@ -182,7 +182,7 @@ class GenComp {
       ])
 
       // 3.2 写入component.json
-      compJson[compType].children[compName] = {
+      compJson[compType].children[dashName] = {
         label: labelName
       }
       writeFile(`${cwd}/components.json`, JSON.stringify(compJson, null, 2))
