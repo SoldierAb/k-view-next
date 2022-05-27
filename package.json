@@ -34,11 +34,6 @@
     "gen": "node build/genComp.js",
     "commit": "git add . && git-cz"
   },
-  "sideEffects": [
-    "lib/**/style/*",
-    "es/**/style/*",
-    "*.less"
-  ],
   "devDependencies": {
     "@ant-design/icons-vue": "^6.0.1",
     "@babel/core": "^7.16.7",
