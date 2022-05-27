@@ -2,10 +2,10 @@
 const path = require('path')
 
 module.exports = {
-  preset: 'ts-jest',
-  verbose: true,
+    preset: 'ts-jest',
+    verbose: true,
     rootDir: path.resolve(__dirname, './'),
-    moduleFileExtensions: ['ts','tsx', 'js', 'jsx', 'vue'],
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'vue'],
     transform: {
         '^.+\\.(vue|md)$': '<rootDir>/node_modules/@vue/vue3-jest',
         '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
