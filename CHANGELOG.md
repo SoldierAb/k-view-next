@@ -1,3 +1,12 @@
+## [1.0.4-alpha.4](https://github.com/SoldierAb/k-view-next/compare/v1.0.4-alpha.3...v1.0.4-alpha.4) (2022-05-27)
+
+
+### Bug Fixes
+
+* 🐛 delete useless sideEffects ([eeddcd3](https://github.com/SoldierAb/k-view-next/commit/eeddcd3b769ca6644fa79ef03a80d73c720c2c9c))
+
+
+
 ## [1.0.4-alpha.3](https://github.com/SoldierAb/k-view-next/compare/v1.0.4-alpha.2...v1.0.4-alpha.3) (2022-05-27)
 
 
