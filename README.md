@@ -93,7 +93,6 @@ yarn compile
 
 ### gen
 
-`TODO`
 
 Script to quickly create component code
 
