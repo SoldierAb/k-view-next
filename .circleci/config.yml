@@ -33,7 +33,7 @@ jobs:
           at: ~/repo
       - add_ssh_keys:
           fingerprints:
-            - "d7:66:81:7d:99:c6:55:3a:48:53:47:26:84:73:a6:f5"
+            - "d1:d3:bd:5c:88:99:91:1a:68:26:91:b1:0a:43:74:22"
       - run:
           name: Knows_hosts add
           command: ssh-keyscan github.com >> ~/.ssh/known_hosts
