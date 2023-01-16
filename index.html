@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>k-view-next</title>
+    <link rel="icon" href="./logo.ico">
+    <link rel="stylesheet" href="./externals/github.css">
+<script defer src="./main/index.cbd7b6a3273f512ff8dc.js"></script></head>
+<body>
+    <div id="app"></div>
+    <script src="./externals/highlight.min.js"></script>
+    <script src="./externals/clipboard.min.js"></script>
+    <script>
+        new ClipboardJS('.clipboard-btn',{
+            text: function(trigger) {
+                return decodeURIComponent(trigger.getAttribute('data-clipboard-text'));
+            } 
+        });
+    </script>
+</body>
+</html>
