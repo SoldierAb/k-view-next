@@ -1,0 +1,11 @@
+{
+  "basic": {
+    "label": "基础组件",
+    "icon": "build",
+    "children": {
+      "button": {
+        "label": "按钮"
+      }
+    }
+  }
+}

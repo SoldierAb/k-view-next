@@ -1,0 +1,92 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+      - image: circleci/node:14
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+         keys:
+         - v1-dependencies-{{ checksum "package.json" }}
+         # fallback to using the latest cache if no exact match is found
+         - v1-dependencies-
+      - run:
+          name: Install
+          command: yarn install
+      - save_cache:
+         paths:
+           - node_modules
+         key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  site:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - add_ssh_keys:
+          fingerprints:
+            - "ae:9d:1b:7b:6a:98:6b:1e:46:77:49:c3:4f:0f:ff:5f"
+      - run:
+          name: Knows_hosts add
+          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run:
+          name: Prepare shell commands
+          command: cp .circleci/github.sh ./ && chmod +x ./github.sh && ls -a
+      - run:
+          name: Run github shell
+          command: ./github.sh
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Run tests
+          command: yarn test
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate in registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish Package
+          command: npm publish
+
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - install:
+          filters: &tagged
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - site:
+          requires:
+            - install
+          filters:
+            <<: *tagged
+      - test:
+          requires:
+            - install
+          filters:
+            <<: *tagged
+      - deploy:
+          requires:
+            - test
+          filters:
+            <<: *tagged

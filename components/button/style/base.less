@@ -1,0 +1,70 @@
+.btn-color(@color; @background; @border){
+    color: @color;
+    background: @background;
+    border-color: @border
+}
+
+// 按钮基础样式
+.btn(){
+    position: relative;
+    display: inline-block;
+    outline: 0;
+    text-align: center;
+    border: 1px solid  @border-color-base;
+    border-radius: 2px;
+    background: @text-color-white;
+    overflow: hidden;
+    padding: 3px 7px;
+    // &:active{
+    //     transform: translate3d(1px, 2px,0);
+    // }
+    &:hover,
+    &:focus{
+        cursor: pointer;
+    }
+    &[disabled]{
+        cursor: not-allowed;
+        .btn-color(@text-color-secondary, @disabled-bg-color, @border-color-base);
+    }
+}
+
+.btn-wave(@color){
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(circle, @color 10%, transparent 10.1%);
+        transform: scale(10);
+        opacity: 0;
+        transition: all .6s;
+    }
+    &:active::after{
+        transform: scale(0);
+        opacity: .5;
+        transition: 0s;
+    }
+}
+
+
+.btn-primary(){
+    .btn-wave(@wave-color-light);
+    .btn-color(@text-color-white, @primary-color, @primary-color);
+}
+
+.btn-success(){
+    .btn-color(@text-color-white, @success-color, @success-color);
+    .btn-wave(@wave-color-light);
+}
+
+.btn-warning(){
+    .btn-color(@text-color-white, @warning-color, @warning-color);
+    .btn-wave(@wave-color-light);
+}
+
+.btn-error(){
+    .btn-color(@text-color-white, @error-color, @error-color);
+    .btn-wave(@wave-color-light);
+}

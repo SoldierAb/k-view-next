@@ -1,0 +1,17 @@
+.circleci/
+.vscode/
+build/
+coverage/
+docs/
+es/
+lib/
+scripts/
+site/
+
+tests/**/*.spec.js
+
+components/**/style
+
+jest.config.js
+gulpfile.js
+babel.config.js

@@ -1,0 +1,47 @@
+@import '../../theme/index.less';
+@import './base.less';
+
+@btn-prefix-cls: ~'@{view-prefix}-btn';
+
+.@{btn-prefix-cls} {
+   &-container {
+      position: relative;
+      color: @text-color;
+      .btn();
+      .btn-wave(@wave-color-light);
+   }
+
+   &-primary {
+      .btn-primary();
+   }
+
+   &-success {
+      .btn-success();
+   }
+
+   &-warning {
+      .btn-warning();
+   }
+
+   &-error {
+      .btn-error();
+   }
+
+   &-group-container{
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+      .@{btn-prefix-cls}-container {
+         border-radius: 0;
+         &:not(:first-child){
+            border-left:none;
+         }
+         &:first-child{
+            border-radius: 4px 0 0 4px;
+         }
+         &:last-child{
+            border-radius: 0 4px 4px 0;
+         }
+      }
+   }
+}

@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "rootDir":"./",
+        "baseUrl": "./",
+        "paths": {
+            "k-view-next": [
+                "components/index.ts"
+            ],
+            "k-view-next/lib/*": [
+                "components/*"
+            ],
+            "k-view-next/es/*": [
+                "components/*"
+            ]
+        },
+        "target": "es6",
+        "strict": true,
+        "jsx": "preserve",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "noImplicitAny": false,
+        "skipLibCheck": true,
+        "allowJs": true,
+        "importsNotUsedAsValues": "preserve"
+    },
+    "exclude": [
+        "node_modules",
+        "build",
+        "lib",
+        "es",
+        "dist",
+        "scripts",
+        "**/__tests__/**/*"
+    ]
+}

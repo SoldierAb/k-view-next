@@ -1,0 +1,3 @@
+<template>
+  <k-%DashName% />
+</template>
